@@ -1,0 +1,67 @@
+<%
+
+String.prototype.toDotted = function () {
+    return this.replace(/-/gi, ".");
+}
+
+%>
+    <!-- Section Content -->
+    <section id="home">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 u-bg-overlay g-flex-centered g-height-100vh--md g-min-height-300 g-bg-img-hero g-bg-black-opacity-0_7--after g-py-40 g-pl-50--md"
+                    style="background-image: url(assets/img/league_large_poster.jpg);" data-calc-target="#js-header">
+                    <div class="w-100 u-bg-overlay__inner g-py-100">
+
+                        <!--
+                    <h3 class="h4 g-font-weight-700 g-color-white g-mb-30 d-flex align-items-center">
+                        <span class="u-arrow-v1 g-font-size-default fa fa-angle-left g-height-30 g-width-30 g-rounded-50x g-bg-white g-theme-color-gray-light-v2 g-mr-20"></span>2017.06.25
+                        <span class="u-arrow-v1 g-font-size-default fa fa-angle-right g-height-30 g-width-30 g-rounded-50x g-bg-white g-theme-color-gray-light-v2 g-ml-20"></span>
+                    </h3>
+
+                    <div class="g-brd-left g-brd-7 g-brd-primary g-color-white g-pl-30 g-mb-30">
+                        <h2 class="text-uppercase g-line-height-0_9 g-font-weight-700 g-font-size-40 g-font-size-56--md g-font-size-76--lg mb-0">쀼삐쀼삐vs효도</h2>
+                    </div>
+
+                    <a class="btn btn-lg u-btn-darkgray u-btn-inset mx-2" href="#">
+                                <i class="fa fa-arrow-right g-color-primary mr-2"></i> 경기정보
+                            </a>
+                    -->
+
+                        <!-- Carousel -->
+                        <div class="js-carousel" data-infinite="true" data-arrows-classes="u-arrow-v1 g-pos-abs g-top-0 g-width-30 g-height-30 g-theme-color-gray-light-v2 g-bg-white g-rounded-50x g-transition-0_2 g-transition--ease-in"
+                            data-arrow-left-classes="g-font-size-default fa fa-angle-left g-left-0" data-arrow-right-classes="g-font-size-default fa fa-angle-right g-left-200"
+                            data-speed="0">
+                            <%
+                            pdata.games.forEach(function(value, index){
+                            
+                            %>
+                                <div class="js-slide" data-game-date="<%=value.date.toDotted()%>">
+                                    <div class="g-max-width-750">
+                                        <h3 class="h4 g-font-weight-700 g-color-white g-mb-30 d-block align-items-center g-ml-50">
+                                            <%=value.date.toDotted()%>
+                                        </h3>
+                                        <div class="g-brd-left g-brd-7 g-brd-primary g-color-white g-pl-30 g-mb-30">
+                                            <h2 class="text-uppercase g-line-height-0_9 g-font-weight-700 g-font-size-30 g-font-size-56--md g-font-size-76--lg mb-0">
+                                                <%=(value.blue_team_name+'vs'+value.red_team_name)%>
+                                            </h2>
+                                        </div>
+
+                                        <a class="btn btn-lg text-uppercase u-btn-white g-font-weight-700 g-font-size-12 g-rounded-10 g-px-25 g-py-12 mb-0" href="/s2/game?gid=<%=value.gid%>">
+                                    <i class="fa fa-arrow-right g-color-primary mr-2"></i> 경기정보
+                                </a>
+                                    </div>
+                                </div>
+                                <% });%>
+
+                        </div>
+                        <!-- End Carousel -->
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Section Content -->

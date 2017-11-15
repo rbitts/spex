@@ -1,0 +1,81 @@
+<%
+
+var pointArray = pdata.league_point !== undefined ? pdata.league_point : [];
+var medal_style = [
+    "medal-gold","medal-silver","medal-bronze",
+];
+%>
+
+    <!-- Section Content -->
+    <section id="recentProjects" class="u-bg-overlay g-bg-img-hero g-bg-primary-opacity-0_9--after g-py-100" style="background-image: url(assets/img-temp/1920x1073/img1.jpg);">
+        <div class="container u-bg-overlay__inner">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-white g-mb-60">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-white g-mb-15">League points</h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-white g-mb-minus-10">포인트순위</h2>
+            </div>
+
+            <div class="row">
+                <%
+                for(var i = 0; i < 3 ; i++){
+                    var medal_name = medal_style[i];
+                    var medal_info = pointArray[i];
+                    
+                %>
+                    <div class="col-md-4 g-mb-20 g-mb-0--md">
+                        <div class="u-arrow-v1 g-absolute-centered--x g-font-size-50 g-height-100 g-width-100 g-rounded-50x g-bg-white icon-trophy <%=medal_name%>">
+                        </div>
+                        <div class="u-heading-v8-1 g-mb-20 g-mt-120 text-center">
+                            <h2 class="text-uppercase g-font-weight-700 g-color-white">
+                                <%=medal_info.player_id.toShortID()%>
+                            </h2>
+                            <strong class="text-uppercase g-font-size-15 g-color-white-opacity-0_8 p-0 g-mb-7"><%=medal_info.point%>P</strong>
+                        </div>
+                    </div>
+                    <%}%>
+
+            </div>
+
+            <div id="accordion-01-body-01" class="collapse" aria-labelledby="accordion-01-heading-01">
+
+                <div class="row g-mb-20 ">
+                    <%
+                for(var i = 3; i < pointArray.length ; i++){
+                    var medal_name = medal_style[i];
+                    var medal_info = pointArray[i];
+                    
+                %>
+                        <div class="col-6 col-md-4">
+                            <div class="media g-parent g-mb-15">
+                                <div class="d-flex align-self-center g-mr-15">
+                                    <span class="u-icon-v2 g-width-40 g-height-40 g-color-white g-brd-4 g-theme-brd-gray-dark-v3 rounded-circle">
+                            <i class="g-font-style-normal g-font-weight-700 g-font-size-16 g-color-white"><%=medal_info.point%></i>
+                          </span>
+                                </div>
+
+                                <div class="media-body align-self-center">
+                                    <h3 class="h6 text-uppercase g-font-weight-600 g-font-secondary g-color-white mb-0">
+                                        <%=medal_info.player_id.toShortID()%>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+
+                </div>
+            </div>
+
+
+            <div class="row g-mb-20 ">
+                <div class="col-12" id="accordion-01-heading-01">
+                    <div class="text-center">
+                        <a class="btn-block u-btn-primary g-bg-secondary g-color-primary g-color-white--hover g-bg-primary--hover g-font-weight-700 g-font-size-14 g-rounded-10 g-py-10 g-px-35"
+                            href="#accordion-01-body-01" data-toggle="collapse" data-parent="#accordion-01" aria-expanded="false"
+                            aria-controls="accordion-01-body-01">모든 사용자 보기</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- End Section Content -->

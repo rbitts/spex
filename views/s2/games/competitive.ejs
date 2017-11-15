@@ -1,0 +1,95 @@
+<% 
+layout('/s2/layout');
+
+var games = (info) ? info : [];
+%>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs g-bg-gray-light-v5 g-py-50">
+        <div class="container">
+            <div class="d-sm-flex text-center">
+                <div class="align-self-center">
+                    <h1 class="h3 g-font-weight-300 w-100 g-mb-10 g-mb-0--md">경기정보</h1>
+                </div>
+
+                <div class="align-self-center ml-auto">
+                    <ul class="u-list-inline">
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/">홈</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-color-primary">
+                            <span>경기중계</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+    <!-- Section Content -->
+    <section id="donators" class="g-py-100">
+        <div class="container">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-60">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">SPEX S02</h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">중계준비</h2>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="container">
+            <div class="row">
+                <!-- Content -->
+                <div class="col-md-12 flex-md-unordered">
+                    <div class="g-pl-15--lg">
+                        <!-- Filters -->
+                        <div class="d-flex justify-content-end align-items-center g-brd-bottom g-brd-gray-light-v4 g-pt-40 g-pb-20">
+                        </div>
+                        <!-- End Filters -->
+
+                        <% 
+                        games.forEach(function(game){
+                        %>
+                            <%- include ./games_template_competitive.ejs %>
+                                <%
+                                }); 
+                                %>
+                    </div>
+
+                </div>
+                <!-- End Content -->
+
+            </div>
+        </div>
+        <!-- End Products -->
+    </section>
+
+
+    <script>
+        window.onload = function () {
+            $('head').append(' <script src = \'/s2/assets/js/helpers/team.selector.js\'> <\/script>');
+            $('head').append(' <script src = \'/s2/js/view/games.js\'> <\/script>');
+
+
+            // var clockpicker = $('.clockpicker').clockpicker({
+            //     twelvehour: true,
+            //     'default': '22:00',
+            //     donetext: 'Done',
+            //     afterDone: function () {
+            //         clockpicker.val(clockpicker.val().slice(0, -2) + ' ' + clockpicker.val().slice(-2));
+            //     }
+            // });
+
+
+            $(document).ready(function () {
+                // $('#createGameModal').modal('show');
+                //     $('#createGameModal').on('shown.bs.modal', function (e) {
+                //         $.get("/api/game/new", {}, function (response, status) {
+                //             console.log(response);
+                //         });
+                //     });
+                $('.js-datepicker').datepicker("setDate", new Date());
+            });
+        }
+    </script>

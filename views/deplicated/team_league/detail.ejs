@@ -1,0 +1,186 @@
+<% 
+    layout('/layout')
+    var next_round = 1;
+var battle_ground = ['', 
+'anubis', 'hanamura',
+'volscaya','gibrolter',
+'dorado', '66road', 
+'rizang', 'illious',
+'nepal', 'oasis', 
+'kingsraw', 'numbani', 
+'holywood','eianvalde' ];
+var battle_ground_name = ['',
+'아누비스','하나무라',
+'볼스카야 인더스트리', '감시 기지: 지브롤터',
+'도라도', '66번국도',
+'리장 타워', '일리오스',
+'네팔', '오아시스',
+'왕의 길', '눔바니',
+'헐리우드', '아이헨발데']
+
+
+ %>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>내전정보</strong></h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/league/dashboard">홈</a>
+                </li>
+                <li>
+                    <a href="/league/scream">
+                        경기기록
+                    </a>
+                </li>
+                <li class="active">
+                    <strong>경기정보</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <!--<section class="row" scream-member-scene="scream-member-scene">
+        <div class="scene">
+            <div class="layer left tracer"></div>
+            <div class="layer left winston"></div>
+        </div>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+        <p>dd</p>
+
+    </section>-->
+    <section class="row" scream-round="scream-round">
+        <% 
+                for(var i = 0; i < round_info.length ; i ++ ) {
+                next_round++ ;
+            %>
+            <div class="col-md-6 m-t-md">
+                <div class="round-battle-ground-bg battle-ground-<%=battle_ground[round_info[i].battle_ground]%>">
+                    <span class="round-result"><%=round_info[i].won_team_name%> 승리</span>
+                    <p class="round-title">제
+                        <%=round_info[i].rid%> 경기<span class="round-battle-ground-title"> - <%=battle_ground_name[round_info[i].battle_ground]%> </span></p>
+                    <a class="user_role_level_2" href="/league/round_insert?gid=<%=round_info[i].gid%>&rid=<%=round_info[i].rid%>"><span class="round-modify"> <i class="fa fa-pencil-square"></i> 수정</span></a>
+                </div>
+            </div>
+            <% } %>
+                <div class="col-md-6 m-t-md user_role_level_2">
+                    <div class="round-add">
+                        <a href="/league/round_insert?gid=<%=game_info.game_id%>&rid=<%=next_round%>">
+                            <p class="round-add-text"><i class="fa fa-plus-circle"></i></p>
+                        </a>
+                    </div>
+                </div>
+
+    </section>
+
+    <!--<div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="ibox product-detail">
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <div class="col-md-5">
+
+
+                                    <div class="product-images">
+
+                                        <div>
+                                            <div class="image-imitation scream-battle-ground battle-ground-hanamura">
+                                                <span>하나무라</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-7">
+
+                                    <blockquote>
+                                        <h2 class="font-bold m-b-xs">
+                                            팀란포 vs 팀비트개구리
+                                            <span class="label label-primary">리그전</small></span>
+                                        </h2>
+
+                                        <small> <i class="fa fa-trophy"></i> <strong>3:1</strong> 팀란포 승리 </small>
+                                    </blockquote>
+
+                                    <h4>경기참여인원</h4>
+
+                                    <div class="small text-muted">
+                                        <dl class="small m-t-md">
+                                            <dt>팀란포</dt>
+                                            <dd class="project-people">
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                            </dd>
+                                            <dt class="small m-t-md">팀비트개구리</dt>
+                                            <dd class="project-people">
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                                <a href=" "><img alt="image " class="img-circle " src="https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000776.png"></a>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
+                                    <h5><i class="fa fa-tags"></i> 관련경기</h5>
+                                    <div class="scream-game-relative">
+                                        <ul>
+                                            <li>
+                                                <div class="scream-game-tags scream-battle-ground battle-ground-nepal">
+                                                    <div class="scream-game-name-tag">
+                                                        <strong>팀란포 vs 팀비트개구리</strong>
+                                                        <small>네팔</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="scream-game-tags scream-battle-ground battle-ground-rizang">
+                                                    <div class="scream-game-name-tag">
+                                                        팀란포 vs 팀비트개구리
+                                                        <small>리장타워</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ibox-footer ">
+                            <span class="pull-right ">
+                                경기일시 - <i class="fa fa-clock-o "></i> 14.04.2016 
+                            </span> The generated Lorem Ipsum is therefore always free
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>-->

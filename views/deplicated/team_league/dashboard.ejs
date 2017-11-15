@@ -1,0 +1,320 @@
+<% 
+layout('/layout');
+
+String.prototype.toDate= function ()  {
+    return this.substring(0,4) + '년 ' + this.substring(5,7) + '월 ' + this.substring(8,10)+'일';
+}
+
+String.prototype.toShortDate= function ()  {
+    return this.substring(5,7) + '-' + this.substring(8,10)+'';
+}
+
+String.prototype.toTime= function ()  {
+    return (this.substring(0,2) >= 12) ? '오후 '+ (this.substring(0,2) - 12) + '시 ' + this.substring(3,5)+'분' : '오전 '+ this.substring(0,2) + '시 ' + this.substring(3,5)+'분';
+}
+
+Date.prototype.getWeek = function(){
+    var onejan = new Date(this.getFullYear(), 0, 1);
+    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7 );
+}
+
+var weekly_games = dashboard_info.this_week_games;
+//console.log(weekly_games);
+//console.log(dashboard_info.league_point);
+var maxToggle = 6;
+var prev_point = 0;
+var step = 0;
+var color = ['','#ffd700', '#c0c0c0','#cd7f32' ];
+
+var team_score = dashboard_info.team_score;
+var games_info = dashboard_info.games_info;
+//console.log(games_info);
+var start_week = new Date("June 5, 2017 00:00:00").getWeek();
+var current_week = new Date().getWeek() - start_week + 1;
+//console.log(current_week);
+%>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>삼팩스</strong></h2>
+            <ol class="breadcrumb">
+                <li class="active">
+                    홈
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <section class="row m-t-lg" league-schedule-board="league-schedule-board">
+        <div id="schedule_week_" class="schedule_title_row">
+            <div class="schedule_title_button">
+                <button id="schedule_week_prev" class="btn btn-default btn-circle" type="button" onclick="changeScheduleCr(-1)"><i class="fa fa-chevron-left"> </i></button>
+            </div>
+            <div class="week-title">
+                <h4 id="schedule_week">주차 경기</h4>
+            </div>
+            <div class="schedule_title_button">
+                <button class="btn btn-default btn-circle" type="button" onclick="changeScheduleCr(+1)"><i class="fa fa-chevron-right"> </i></button>
+            </div>
+        </div>
+        <ul class="schedule_content">
+            <li>
+                <div class="schedule-inner-competitive text-right" id="schedule_blue_team_1"></div>
+                <div class="schedule-inner-info"><button class="btn btn-default btn-rounded" type="button" id="schedule_game_time_1">0:00</button></div>
+                <div class="schedule-inner-competitive" id="schedule_red_team_1"></div>
+                <div class="schedule-inner-info"><button class="btn btn-default" type="button">중계</button></div>
+            </li>
+            <li>
+                <div class="schedule-inner-competitive text-right" id="schedule_blue_team_2"></div>
+                <div class="schedule-inner-info"><button class="btn btn-default btn-rounded" type="button" id="schedule_game_time_2">0:00</button></div>
+                <div class="schedule-inner-competitive" id="schedule_red_team_2"></div>
+                <div class="schedule-inner-info"><button class="btn btn-default" type="button">중계</button></div>
+            </li>
+            <li>
+                <div class="schedule-inner-competitive text-right" id="schedule_blue_team_3"></div>
+                <div class="schedule-inner-info"><button class="btn btn-default btn-rounded" type="button" id="schedule_game_time_3">0:00</button></div>
+                <div class="schedule-inner-competitive" id="schedule_red_team_3"></div>
+                <div class="schedule-inner-info"><button class="btn btn-default" type="button">중계</button></div>
+            </li>
+            <li></li>
+        </ul>
+
+    </section>
+
+    <section class="row m-t-lg" league-video="league-video">
+        <div class="video-title">
+            <h4>dd</h4>
+        </div>
+        <div class="youtube" data-streamming="youtube" data-embed="<%=dashboard_info.video%>">
+            <div class="play-button"></div>
+        </div>
+
+        <figure>
+            <!--<iframe width="425" height="349" src="<%=dashboard_info.video%>" frameborder="0" allowfullscreen></iframe>-->
+        </figure>
+
+    </section>
+
+    <section class="row m-t-lg " league-ranking="league-ranking">
+        <div class="ranking-title">
+        </div>
+        <table class="table table-hover league-ranking-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>승</th>
+                    <th>패</th>
+                    <th>승률</th>
+                    <th>승차</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th colspan="6" style="text-align:right;padding-right:10px;"><i class="fa fa-clock-o"></i>2017-06-xx</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <% 
+                    var seq = 0;
+                    var prev_win = 999;
+                    team_score.forEach(function (v,i){ 
+                        if( v.win != prev_win ) {
+                        seq++;
+                        prev_win = v.win;
+                        }
+                %>
+
+                    <tr>
+                        <td>
+                            <h4>
+                                <%=seq %>
+                            </h4>
+                        </td>
+
+                        <td class="rank-board-team-name">
+                            <h5><span><img class="img-circle " src='<%=v.teamlogo%>' style="width:32px;height:32px;margin-right:5px;" /></span>
+                                <%=v.teamname%>
+                            </h5>
+                        </td>
+                        <td>
+                            <h5>
+                                <%=v.win%>
+                            </h5>
+                        </td>
+                        <td>
+                            <h5>
+                                <%=v.lose%>
+                            </h5>
+                        </td>
+                        <td>
+                            <h5>
+                                <%=(v.win/(v.win+v.lose) * 100).toFixed(0)%>%</h5>
+                        </td>
+                        <td>
+                            <h5>
+                                <%=(v.win-team_score[0].win)%>
+                            </h5>
+                        </td>
+                    </tr>
+
+                    <%})%>
+
+            </tbody>
+
+        </table>
+    </section>
+
+    <div class="row" league-ranking-board="league-ranking-board">
+        <div class="header">
+            <span class="bg"></span>
+            <div class="title text-white">
+                <h1 style="font-style:italic"><strong>포인트 순위</strong></h1>
+            </div>
+            <div class="col-lg-12">
+
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="row">
+                    <div class="ibox-content schedule project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                                <% dashboard_info.league_point.forEach(function (v,i){
+                            
+                                    if(prev_point != v.point){
+                                        prev_point = v.point;
+                                        step++;
+                                    }
+                                    if( step < maxToggle ) {
+                                %>
+                                    <tr>
+                                        <td class="project-status">
+                                            <h4><i class="fa fa-trophy" style="color:<%=color[step]%>"></i>
+                                                <%=step%>위</h4>
+                                        </td>
+                                        <td class="project-title">
+                                            <h4>
+                                                <%=toShortID(v.player_id)%>
+                                            </h4>
+                                        </td>
+                                        <td class="project-completion">
+                                            <h4>
+                                                <%=v.point%>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <%}})%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row animated fadeInRight" highlight="highlight">
+        <div class="header bg">
+            <div class="title text-white">
+                <h1 style="font-style:italic"><strong>금주 최고의 플레이</strong></h1>
+            </div>
+            <div class="col-lg-12">
+            </div>
+        </div>
+
+        <div class="row content">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                                <div class="ibox" team-list="team-list">
+                                    <div class="ibox-content product-box">
+                                        <figure>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="row collapse league-dashboard-join-footer" league-join-footer="league-join-footer">
+        <div class="col-lg-12">
+            <div class="row  text-white">
+                <div class="col-xs-7 col-xs-offset-5 text-center">
+                    <h3 class="m-t-lg">삼성전자 리그</h3>
+                    <small> 참여를 기다리고 있습니다.</small>
+                    <div class="form-group m-t-sm">
+                        <button class="btn btn-block btn-success ladda-button ladda-button-accept" data-style="slide-up"><i class="fa fa-sign-in"></i>  참여하기</button>
+                    </div>
+                </div>
+            </div>
+            <img src="/img/hanzo-genji.png" class="join-image">
+        </div>
+    </div>
+
+    <div class="row collapse league-dashboard-join-footer" style="padding-bottom:200px">
+    </div>
+    <script>
+        window.onload = function () {
+            $('head').append(' <script src = \'/js/app/app.dashboard.js\'> <\/script>');
+        }
+        var schedule_title_element = $("#schedule_week");
+
+        var current_week = <%=current_week%>;
+
+        $.get("/league/gameinfo", {
+            week: current_week,
+        }, function (response, status) {
+            if (response === undefined) return;
+            changeScheduleInfo(response);
+        });
+
+        var changeScheduleCr = function (week) {
+            if (current_week + week > 0 && current_week + week < 11) {
+                $.get("/league/gameinfo", {
+                    week: current_week + week,
+                }, function (response, status) {
+                    if (response === undefined) return;
+                    current_week = current_week + week;
+                    changeScheduleInfo(response);
+                });
+            }
+        }
+
+        var changeScheduleInfo = function (response) {
+            schedule_title_element.text((response[0].week + "주차 경기"));
+
+            $("#schedule_game_time_1").text(response[0].time);
+            $("#schedule_blue_team_1").html("<a href=\"/league/teaminfo?teamid=" + response[0].blue_team_id +
+                "\">" + response[0].blue_team_name + "<img src=\"" + response[0].blue_team_logo +
+                "\"></a>");
+            $("#schedule_red_team_1").html("<a href=\"/league/teaminfo?teamid=" + response[0].red_team_id +
+                "\"><img src=\"" + response[0].red_team_logo + "\">" + response[0].red_team_name + "</a>");
+
+            $("#schedule_game_time_2").text(response[1].time);
+            $("#schedule_blue_team_2").html("<a href=\"/league/teaminfo?teamid=" + response[1].blue_team_id +
+                "\">" + response[1].blue_team_name + "<img src=\"" + response[1].blue_team_logo +
+                "\"></a>");
+            $("#schedule_red_team_2").html("<a href=\"/league/teaminfo?teamid=" + response[1].red_team_id +
+                "\"><img src=\"" + response[1].red_team_logo + "\">" + response[1].red_team_name + "</a>");
+
+            $("#schedule_game_time_3").text(response[2].time);
+            $("#schedule_blue_team_3").html("<a href=\"/league/teaminfo?teamid=" + response[2].blue_team_id +
+                "\">" + response[2].blue_team_name + "<img src=\"" + response[2].blue_team_logo +
+                "\"></a>");
+            $("#schedule_red_team_3").html("<a href=\"/league/teaminfo?teamid=" + response[2].red_team_id +
+                "\"><img src=\"" + response[2].red_team_logo + "\">" + response[2].red_team_name + "</a>");
+        }
+    </script>

@@ -1,0 +1,57 @@
+<% layout('/layout') %>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>삼팩스</strong></h2>
+            <ol class="breadcrumb">
+                <li class="active">
+                    홈
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-xs-7 col-xs-offset-5 text-center">
+                                <h3 class="m-t-lg">삼팩스에 참가하기</h3>
+                                <small> 참여를 기다리고 있습니다.</small>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <button class="btn btn-block btn-primary ladda-button ladda-button-accept" data-style="slide-up"><i class="fa fa-sign-in"></i>  참여하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img src="/img/hanzo-genji.png" class="join-image">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.onload = function () {
+            $('head').append('<script src=\'/js/app/app.calendar.js\'><\/script>');
+        }
+    </script>

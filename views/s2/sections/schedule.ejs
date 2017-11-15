@@ -1,0 +1,84 @@
+<section class="g-py-90">
+    <div class="container g-max-width-780 text-center g-mb-70">
+        <div class="u-heading-v8-2 g-mb-40">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-30">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">SCHEDULE</h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">경기일정</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <ul class="row u-timeline-v2-wrap list-unstyled">
+                    <% 
+                        pdata.games.forEach((g,i)=>{ 
+                            var today = moment(),
+                                gdate = moment(g.date);
+                            if(today.format('ww') == gdate.format('ww')){
+                        %>
+                        <li class="col-md-12 g-mb-20">
+                            <div class="row">
+                                <!-- Timeline Date -->
+                                <div class="col-3 text-md-right g-pt-20--md g-pr-40--md g-mb-20">
+                                    <h5 class="h6 g-font-weight-700 mb-0">
+                                        <%=(gdate.format('ww')-35)%>주차<br/> 제
+                                            <%=(gdate.format('e'))%>경기
+                                    </h5>
+                                </div>
+                                <!-- End Timeline Date -->
+
+                                <!-- Timeline Content -->
+                                <div class="col-9 g-orientation-left g-pl-40">
+                                    <!-- Timeline Dot -->
+                                    <div class="u-timeline-v2__icon g-top-15">
+                                        <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+                                    </div>
+                                    <!-- End Timeline Dot -->
+
+                                    <article class="g-pos-rel g-bg-gray-light-v5 g-pa-10">
+                                        <!-- Timeline Arrow -->
+                                        <div class="u-triangle-inclusive-v1--right g-top-10 g-z-index-2">
+                                            <div class="u-triangle-inclusive-v1--right__back g-brd-gray-light-v5-right"></div>
+                                        </div>
+
+                                        <!-- End Timeline Arrow -->
+
+                                        <div class="g-font-weight-700 g-font-size-12 g-mb-10">
+                                            <img class="d-inline-block g-brd-around g-brd-black image-inner-shadow g-mr-15 g-width-30" src="<%=(g.game_info.red_team.info.info.logo)%>"
+                                                alt="<%=(g.game_info.red_team.info.info.name)%>">
+                                            <%=(g.game_info.red_team.info.info.name)%>
+                                        </div>
+                                        <div class="g-font-weight-700 g-font-size-12">
+                                            <img class="d-inline-block g-brd-around g-brd-black image-inner-shadow g-mr-15 g-width-30" src="<%=(g.game_info.blue_team.info.info.logo)%>"
+                                                alt="<%=(g.game_info.blue_team.info.info.name)%>">
+                                            <%=(g.game_info.blue_team.info.info.name)%>
+                                        </div>
+
+                                    </article>
+                                </div>
+                                <!-- End Timeline Content -->
+                            </div>
+                        </li>
+                        <% }}) %>
+                </ul>
+            </div>
+            <div class="col-12 col-md-6">
+                <div id='jalendar' class='jalendar'>
+                    <% 
+                        pdata.games.forEach((g,i)=>{ 
+                            var dtime = moment(g.date),
+                                title = '{2} {0}vs{1}'.format(g.game_info.red_team.info.info.name,g.game_info.blue_team.info.info.name,
+                                dtime.format('HH:MM')),
+                                link = (g.done) ? '/s2/game/{0}'.format(g.game_id) : '/s2/game/preview/{0}'.format(g.game_id);
+                            %>
+                        <div class="added-event" data-link="<%= link %>" data-date="<%= dtime.format('YYYY-MM-DD')%>" data-title="<%=title%>"></div>
+                        <% }) %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,32 @@
+<%
+
+
+
+for(key in heroes){
+    var name = heroes[key];
+    
+    var checked = "";
+    if(user.account.player.mostplay == key){
+        checked = "checked";
+    }
+    
+%>
+    <div class="col-md-6">
+        <label class="u-check w-100 g-mb-15">
+        <input class="hidden-xs-up g-pos-abs g-top-10 g-right-10" type="radio" name="profile_most_hero" <%=checked%> value="<%=key%>"></input>
+        <div class="g-brd-primary--checked g-bg-primary-opacity-0_2--checked g-brd-around g-brd-gray-light-v2 g-rounded-5">
+            <div class="media g-pa-12">
+            <div class="media-body align-self-center g-color-blue">
+                <img class="g-width-30" src="/img/sm-portrait/<%=key%>.png">
+                <strong class="d-inline-block g-color-gray-dark-v2 g-font-weight-700 g-mt-3 g-valign-middle"><%=name%></strong>
+            </div>
+
+            <div class="d-flex align-self-center g-width-20 g-ml-15">
+                <div class="u-check-icon-radio-v5 g-pos-rel g-width-20 g-height-20"><i></i></div>
+            </div>
+            </div>
+        </div>
+    </label>
+    </div>
+
+    <%}%>

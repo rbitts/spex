@@ -1,0 +1,118 @@
+<% 
+    layout('/layout') ;
+    Number.prototype.asTime = function () {
+        if(isNaN( this )) return '0초';
+        var hour = Math.floor(this / 3600),
+            min = Math.floor((this - hour * 3600) / 60),
+            sec = this - hour * 3600 - min * 60,
+            hourStr, minStr, secStr;
+        if(hour){
+            hourStr = hour.toString(),
+            minStr = min < 9 ? "0" + min.toString() : min.toString();
+            secStr = sec < 9 ? "0" + sec.toString() : sec.toString();
+            return hourStr + "시간" + minStr + "분" + secStr + "초";
+        }
+        if(min){
+            minStr = min.toString();
+            secStr = sec < 9 ? "0" + sec.toString() : sec.toString();
+            return  minStr + "분" + secStr + "초";
+        }
+        return sec.toString() + "초";
+    }
+    
+    Number.prototype.asTimeStamp = function(){
+        if(isNaN( this )) return '0초';
+        if (this > 3600000)
+            return (this / 3600000).toFixed(0) + '시간';
+        else if (this > 60000)
+            return (this / 60000).toFixed(0) + '분';
+        return this + '초';
+    }
+
+
+    var hero_name = profile_hero_data.user_info_hero_data.thumb.replace('/img/heros/','').replace('.png','');
+    var hero_display_name =  profile_hero_data.user_info_hero_data.display_name;
+    var hero_info = profile_hero_data.user_info_hero_data.detail;
+    var kda = (hero_info.eliminations / hero_info.deaths).toFixed(1);
+    kda = isNaN(kda) ? 0 : kda;
+    var winrate = ((hero_info.games_won / hero_info.games_played) * 100).toFixed(1);
+    winrate = isNaN(winrate) ? 0 : winrate;
+    var fire_time = parseInt(hero_info.time_spent_on_fire_average).asTime();
+    var playtime = parseInt(hero_info.time_played).asTimeStamp();
+    
+%>
+    <div class="row" id="container-row" user-view-profile="user-view-profile">
+        <div class="row m-b-lg">
+
+            <span id="profile-id" class="collapse"><%=profile_id%></span>
+            <div class="col-lg-12 profile-portrait-bg">
+                <img class="profile-portrait-image" src="/img/poster/<%=hero_name%>.jpg">
+                <div class="profile-summary">
+                    <h1 class="font-bold m-t-lg text-white">
+                        <%=hero_display_name%>
+                    </h1>
+                </div>
+                <div class="hero-summary-bg">
+                    <ul>
+                        <li>
+                            <h4><small class="text-white">KDA&nbsp;&nbsp;</small><strong><%=kda%></strong></h4>
+                        </li>
+                        <li>
+                            <h4><small class="text-white">승률&nbsp;&nbsp;</small><strong><%=winrate%>%</strong></h4>
+                        </li>
+                        <li>
+                            <h4><small class="text-white">평균폭주&nbsp;&nbsp;</small><strong><%=fire_time%></strong></h4>
+                        </li>
+                        <li>
+                            <h4><small class="text-white">플레이&nbsp;&nbsp;</small><strong><%=playtime%></strong></h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row profile-padding-row" user-view-profile="user-view-profile">
+        <div class="col-lg-12 competitive">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h4>전투</h4>
+                </div>
+                <div class="ibox-content">
+                    <ul class="profile-hero-detail">
+                        <li>
+                            <span class="pull-right text-navy">
+                                <%=hero_info.eliminations%>
+                            </span>
+                            <h5>처치</h5>
+                        </li>
+                        <li>
+                            <span class="pull-right text-navy">
+                                <%=hero_info.final_blows%>
+                            </span>
+                            <h5>결정타</h5>
+
+                        </li>
+                        <li>
+                            <span class="pull-right text-navy">
+                                <%=hero_info.solo_kills%>
+                            </span>
+                            <h5>단독 처치</h5>
+                        </li>
+                        <li>
+                            <span class="pull-right text-navy">
+                                <%=((hero_info.shots_hit / hero_info.shots_fired) * 100).toFixed(1)%> %
+                            </span>
+                            <h5>명중률</h5>
+                        </li>
+                        <li>
+                            <span class="pull-right text-navy">
+                                <%=kda%>
+                            </span>
+                            <h5>목숨당 처치</h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>

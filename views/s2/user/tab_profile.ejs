@@ -1,0 +1,191 @@
+<!-- Edit Profile -->
+<div class="tab-pane fade show active" id="nav-1-1-default-hor-left-underline--1" role="tabpanel">
+    <form method="POST">
+
+        <h2 class="h4 g-font-weight-600">프로필 설정</h2>
+        <p>팀, 포지션 정보 등 리그에서 사용하는 개인정보를 설정 할 수 있습니다.</p>
+        <input class="hidden-xs-up" type="text" name="setting_category" value="profile">
+
+        <input class="hidden-xs-up" type="text" name="profile_user_id" value="<%=data_user_id%>">
+        <input class="hidden-xs-up" type="text" name="profile_change_user_id" value="<%=data_user_id%>">
+
+        <ul class="list-unstyled g-mb-30">
+            <!-- Name -->
+            <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
+                <div class="g-pr-10">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">배틀태그</strong>
+                    <span class="align-top"><%=data_user_id.toDisplayID()%></span>
+                </div>
+                <span><i class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i></span>
+            </li>
+            <!-- End Name -->
+
+            <!-- Your ID -->
+            <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
+                <div class="g-pr-10">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">팀정보</strong>
+                    <span class="align-top"><%=teamname%></span>
+                </div>
+                <span><i class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i></span>
+            </li>
+            <!-- End Your ID -->
+
+            <!-- Score -->
+            <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
+                <div class="g-pr-10">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">경쟁전최고점</strong>
+
+                    <div class="input-group g-brd-primary--focus align-top">
+                        <input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="text" placeholder="경쟁전최고점" value="<%=user_max_score%>"
+                            name="score">
+                        <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                            <i class="fa fa-trophy"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <span><i class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i></span>
+            </li>
+            <!-- End Score -->
+
+            <!-- Most Pick -->
+            <li class="d-flex align-items-center justify-content-between g-brd-gray-light-v4 g-py-15">
+                <div class="g-pr-10">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">주캐릭터</strong>
+                    <span id="accordion-01-heading-01" class="align-top">
+                            <span class="ohi-<%=user.account.player.mostplay%> mr-2 g-font-size-26"></span>
+                    <%=heroes[user.account.player.mostplay]%>
+                        </span>
+                </div>
+                <span>
+                        <a class="g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1" href="#accordion-01-body-01" data-toggle="collapse"
+                            data-parent="#accordion-01" aria-expanded="false" aria-controls="accordion-01-body-01">
+                            <span class="icon-pencil"></span>
+                </a>
+                </span>
+            </li>
+            <div id="accordion-01-body-01" class="collapse" aria-labelledby="accordion-01-heading-01">
+                <div class="row">
+                    <% include ./heroes_select.ejs %>
+                </div>
+            </div>
+            <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4"></li>
+            <!-- End Most Pick -->
+
+            <!-- Position -->
+            <li class="d-flex align-items-center justify-content-between g-brd-gray-light-v4 g-py-15">
+                <div class="g-pr-10">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">포지션</strong>
+                    <span id="accordion-01-heading-02" class="align-top">
+                                            
+                            <% if(user.position_defense) {%>
+                            <span class="g-brd-around g-brd-secondary-light-v2 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-13 g-rounded-30 g-transition-0_3 g-px-12 g-py-5 mr-2">
+                            <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#tank"></use>
+                                </svg>Tank
+                            </span>
+                    <% } if(user.position_offense) { %>
+                        <span class="g-brd-around g-brd-secondary-light-v2 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-13 g-rounded-30 g-transition-0_3 g-px-12 g-py-5 mr-2">
+                                <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                    <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#offense"></use>
+                                </svg>DPS
+                            </span>
+                        <% } if(user.position_support) { %>
+                            <span class="g-brd-around g-brd-secondary-light-v2 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-13 g-rounded-30 g-transition-0_3 g-px-12 g-py-5">
+                                <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                    <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#support"></use>
+                                </svg>SUPPORT
+                            </span>
+                            <% } %>
+                                </span>
+                </div>
+                <span>
+                        <a class="g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1" href="#accordion-01-body-02" data-toggle="collapse"
+                            data-parent="#accordion-02" aria-expanded="false" aria-controls="accordion-01-body-02">
+                            <span class="icon-pencil"></span>
+                </a>
+                </span>
+            </li>
+            <div id="accordion-01-body-02" class="collapse" aria-labelledby="accordion-01-heading-02">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label class="u-check w-100 g-mb-15">
+                                <input class="hidden-xs-up g-pos-abs g-top-10 g-right-10" type="checkbox" name="profile_position_defense" <%=defense_checked%> value="defense">
+                                <div class="g-brd-primary--checked g-bg-primary-opacity-0_2--checked g-brd-around g-brd-gray-light-v2 g-rounded-5">
+                                    <div class="media g-pa-12">
+                                        <div class="media-body align-self-center g-color-blue">
+                                            <svg viewbox="0 0 32 32" class="icon-my-info align-middle mr-2 mb-1">
+                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#defense"></use>
+                                            </svg>
+                                            <strong class="d-inline-block g-color-gray-dark-v2 g-font-weight-700 g-mt-3 g-valign-middle">TANK</strong>
+                                        </div>
+
+                                        <div class="d-flex align-self-center g-width-20 g-ml-15">
+                                            <div class="u-check-icon-checkbox-v5 g-pos-rel g-width-20 g-height-20"><i></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="u-check w-100 g-mb-15">
+                                <input class="hidden-xs-up g-pos-abs g-top-10 g-right-10" type="checkbox" name="profile_position_offense" <%=offense_checked%> value="offense">
+
+                                <div class="g-brd-primary--checked g-bg-primary-opacity-0_2--checked g-brd-around g-brd-gray-light-v2 g-rounded-5">
+                                    <div class="media g-pa-12">
+                                        <div class="media-body align-self-center g-color-blue">
+                                            <svg viewbox="0 0 32 32" class="icon-my-info align-middle mr-2 mb-1">
+                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#offense"></use>
+                                            </svg>
+                                            <strong class="d-inline-block g-color-gray-dark-v2 g-font-weight-700 g-mt-3 g-valign-middle">DPS</strong>
+                                        </div>
+
+                                        <div class="d-flex align-self-center g-width-20 g-ml-15">
+                                            <div class="u-check-icon-checkbox-v5 g-pos-rel g-width-20 g-height-20"><i></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="u-check w-100 g-mb-15">
+                                <input class="hidden-xs-up g-pos-abs g-top-10 g-right-10" type="checkbox" name="profile_position_support" <%=support_checked%> value="support" >
+
+                                <div class="g-brd-primary--checked g-bg-primary-opacity-0_2--checked g-brd-around g-brd-gray-light-v2 g-rounded-5">
+                                    <div class="media g-pa-12">
+                                        <div class="media-body align-self-center g-color-blue">
+                                            <svg viewbox="0 0 32 32" class="icon-my-info align-middle mr-2 mb-1">
+                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#support"></use>
+                                            </svg>
+                                            <strong class="d-inline-block g-color-gray-dark-v2 g-font-weight-700 g-mt-3 g-valign-middle">SUPPORT</strong>
+                                        </div>
+
+                                        <div class="d-flex align-self-center g-width-20 g-ml-15">
+                                            <div class="u-check-icon-checkbox-v5 g-pos-rel g-width-20 g-height-20"><i></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4"></li>
+
+            <!-- End Position -->
+        </ul>
+
+        <div class="text-sm-right">
+            <button class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" type="cancel">취소</button>
+            <button class="btn u-btn-primary rounded-0 g-py-12 g-px-25" type="submit"><i class="fa fa-save mr-2"></i>저장</button>
+        </div>
+    </form>
+</div>
+
+<!-- End Edit Profile -->

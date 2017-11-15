@@ -1,0 +1,55 @@
+<% layout('/layout') %>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>리그</strong></h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/league/dashboard">홈</a>
+                </li>
+                <li>
+                    리그
+                </li>
+                <li class="active">
+                    <strong>팀정보</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <% for(var i = 0; i < teaminfo.length;i++ ) { %>
+                <div class="col-sm-4 col-md-3">
+                    <div class="ibox" team-list="team-list">
+                        <div class="ibox-content product-box">
+                            <% if (teaminfo[i].teamlogo === "") { %>
+                                <div class="product-imitation scream-battle-ground empty-logo">
+                                    <% } else { %>
+                                        <div class="product-imitation scream-battle-ground" style="background-image:url(<%=teaminfo[i].teamlogo%>)">
+                                            <% } %>
+                                                <span><%=teaminfo[i].teamname%></span>
+                                        </div>
+                                        <div class="product-desc">
+                                            <small class="text-muted"><i class="fa fa-user-circle"></i> 팀장</small>
+                                            <a href="/league/teaminfo?teamid=<%=teaminfo[i].teamid%>" class="product-name">
+                                                <%=teaminfo[i].teamleader%>
+                                            </a>
+
+                                            <div class="small m-t-xs">
+                                                <i class="fa fa-users"></i> 팀원
+                                                <%=teaminfo[i].count%>명
+                                            </div>
+                                            <div class="m-t text-righ">
+                                                <a href="/league/teaminfo?teamid=<%=teaminfo[i].teamid%>" class="btn btn-xs btn-outline btn-primary"> <i class="fa fa-info-circle"></i> 팀정보 더 보기</a>
+                                            </div>
+                                        </div>
+                                </div>
+
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+        </div>

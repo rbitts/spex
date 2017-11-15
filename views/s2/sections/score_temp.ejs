@@ -1,0 +1,86 @@
+<%
+var teamArray = pdata.teams !== undefined ? pdata.teams : [];
+var first = teamArray[0];
+%>
+
+    <!-- Section Content -->
+    <section id="musicList" class="g-bg-gray-light-v5 g-py-100">
+        <div class="container text-center g-width-780 g-mb-65">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-45">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">경기순위</h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">리그순위</h2>
+            </div>
+        </div>
+
+        <div class="container">
+            <div id="musicListAccordion" class="text-uppercase u-accordion" role="tablist" aria-multiselectable="true">
+                <%
+                teamArray.forEach(function(item,index){
+                %>
+
+                    <!-- Card -->
+                    <div class="card g-brd-none rounded-0 g-mb-1">
+                        <div id="musicListAccordionHeading1" class="u-accordion__header g-pa-0" role="tab">
+                            <div class="w-100 d-md-table g-color-gray-dark-v5" role="button" data-target="#musicListAccordionBody1" data-toggle="collapse"
+                                data-parent="#musicListAccordion" aria-expanded="true" aria-controls="musicListAccordionBody1">
+                                <div class="clearfix d-md-table-cell g-valign-middle g-pa-20">
+                                    <!-- Track Num -->
+                                    <div class="d-inline-block g-mr-20">
+                                        <%=item.info.score.rank%>.</div>
+                                    <!-- End Track Num -->
+                                    <% console.log(item.info.logo)%>
+                                        <!-- Track Avatar -->
+                                        <img class="d-inline-block g-mr-25 g-width-40" src="<%= item.info.logo %>" alt="<%=item.info.name%>">
+                                        <!-- End Track Avatar -->
+                                        <!-- Track Title -->
+                                        <h6 class="d-inline-block g-font-size-13 g-font-weight-700 g-color-black mb-0">
+                                            <%=item.info.name%>
+                                        </h6>
+                                        <!-- End Article Title -->
+                                </div>
+
+                                <div class="d-table-cell g-font-weight-700 g-valign-middle g-width-100 g-px-20 g-py-5">
+                                    <%=item.info.score.won%>승
+                                </div>
+
+                                <div class="d-table-cell g-font-weight-700 g-valign-middle g-width-100 g-px-20 g-py-5">
+                                    <%=item.info.score.lost%>패
+                                </div>
+
+                                <!-- Track Price -->
+                                <div class="d-table-cell g-valign-middle g-width-140 g-px-20 g-py-5">
+                                    <% if((item.info.score.won - first.info.score.won)){ %>
+                                        <%= (item.info.score.won - first.info.score.won) %>
+                                            <% }else{ %>
+                                                <i class="fa fa-minus"></i>
+                                                <% }%>
+                                </div>
+                                <!-- End Track Price -->
+
+                                <!-- Buy Track -->
+                                <div class="text-md-right d-md-table-cell g-valign-middle g-width-140--md g-pa-20">
+                                    <a href="#" class="btn btn-xl rounded-0 w-100 u-btn-primary g-font-weight-700 g-font-size-12">팀정보</a>
+                                </div>
+                                <!-- End Buy Track -->
+                            </div>
+                        </div>
+                        <!-- collapse show -->
+                        <div id="musicListAccordionBody1" class="collapse g-bg-gray-dark-v1 g-color-white" role="tabpanel" aria-labelledby="musicListAccordionHeading1">
+                            <div class="u-accordion__body p-0">
+                                <div class="u-audio-v2 g-bg-black-opacity-0_5">
+                                    <!--
+                                    <audio class="js-audio" controls>
+                                        <source src="assets/audio/track1.mp3" type="audio/mp3">
+                                    </audio>
+                                -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                    <%})%>
+
+            </div>
+        </div>
+    </section>
+    <!-- End Section Content -->

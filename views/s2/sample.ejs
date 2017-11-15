@@ -1,0 +1,18 @@
+<% layout('/s2/layout'); %>
+
+    <% include ./sections/event.ejs %>
+        <% include ./sections/stream.ejs %>
+            <% include ./sections/schedule.ejs %>
+                <% include ./sections/score.ejs %>
+
+                    <% include ./sections/teamlist.ejs %>
+                        <% include ./sections/entry.ejs %>
+
+                            <% /*include ./sections/points.ejs*/ %>
+                                <% /*include ./sections/video.ejs*/ %>
+
+                                    <script>
+                                        window.onload = function () {
+                                            $('head').append(' <script src = \'/s2/js/view/main.js\'> <\/script>');
+                                        }
+                                    </script>

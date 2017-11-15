@@ -1,0 +1,287 @@
+<% layout('layout') %>
+    <div id="pagewrap" class="pagewrap" user-view-profile="user-view-profile">
+        <div class="container show" id="page-1">
+            <div class="row m-b-lg">
+                <div class="col-lg-12 profile-portrait-bg">
+                    <img class="profile-portrait-image" src="/img/poster/ana.jpg">
+                </div>
+            </div>
+            <p><a class="pageload-link" href="#page-2">Show Page Loader</a></p>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2><strong>프로필</strong></h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="">홈</a>
+                        </li>
+                        <li><a>전적조회</a></li>
+                        <li class="active"> <strong>프로필</strong>
+                    </ol>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row m-b-lg m-t-lg">
+                    <div class="col-lg-12">
+                        <div class="ibox product-detail" id="profile-user-container">
+                            <div class="ibox-content">
+                                <div class="sk-spinner sk-spinner-wave">
+                                    <div class="sk-rect1"></div>
+                                    <div class="sk-rect2"></div>
+                                    <div class="sk-rect3"></div>
+                                    <div class="sk-rect4"></div>
+                                    <div class="sk-rect5"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 lg-portrait-background">
+                                        <div class="lg-portrait" id="profile-user-portrait">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <small>LV.245</small>
+                                        <svg viewBox="0 0 32 32" role="presentation" class="icon">
+                                            <title>Support</title>
+                                            <path fill-rule="evenodd" d="M29.3,10.2h-7.5V2.7c0-1.5-1.2-2.7-2.7-2.7h-6.3c-1.5,0-2.7,1.2-2.7,2.7v7.5H2.7
+		c-1.5,0-2.7,1.2-2.7,2.7v6.3c0,1.5,1.2,2.7,2.7,2.7h7.5v7.5c0,1.5,1.2,2.7,2.7,2.7h6.3c1.5,0,2.7-1.2,2.7-2.7v-7.5h7.5
+		c1.5,0,2.7-1.2,2.7-2.7v-6.3C32,11.4,30.8,10.2,29.3,10.2z"></path>
+                                        </svg>
+                                        <svg viewBox="0 0 32 32" role="presentation" class="icon">
+                                            <title>Tank</title>
+                                            <path d="M29,10.7c0,2.1,0,4.1,0,6.2c0,0.6-0.1,1.1-0.4,1.6c-2.9,5.3-6.8,9.7-11.8,13.2c-0.6,0.4-1,0.4-1.6,0
+		c-4.9-3.4-8.8-7.8-11.7-13c-0.3-0.6-0.4-1.2-0.4-1.8c0-3.9,0.1-7.8,0-11.7C3,2.3,5.2,1.9,7.1,1.4C10.4,0.6,13.3,0,16.6,0
+		c3.1,0,7.7,1.1,9.4,1.6c1.3,0.4,2.7,0.9,2.9,2.2C29,4.9,28.9,6,29,7.1C29,8.3,29,9.5,29,10.7C29,10.7,29,10.7,29,10.7z"></path>
+                                        </svg>
+                                        <svg viewBox="0 0 32 32" role="presentation" class="icon">
+                                            <title>Defense</title>
+                                            <path d="M16,10.8c-2,0-4,0-6.1,0c-1.7,0-3.1-1.4-3.1-3.1c0-2,0-3.9,0-5.9c0-1,0.8-1.8,1.7-1.8c0.3,0-0.1,0,0.2,0
+                                        C10,0,9.9,1.3,9.9,1.6c0,0.7,0,0.3,0,1c0,0.3,0.1,0.4,0.4,0.4c0.7,0,1.5,0,2.2,0c0.2,0,0.4-0.2,0.4-0.4c0-0.4,0-0.8,0-1.2
+                                        c0-0.8,0.7-1.4,1.4-1.4c1.4,0,2,0,3.4,0c1.1,0,1.4,1.2,1.3,1.5c0,0.7,0,0.4,0,1.1c0,0.3,0.1,0.5,0.5,0.5c0.7,0,1.4,0,2.1,0
+                                        c0.4,0,0.5-0.1,0.5-0.5c0-0.7,0-0.7,0-1.4c0-0.3,0.1-1.2,1.3-1.2c0.4,0-0.1,0,0.4,0c0.8,0,1.4,0.7,1.4,1.5c0,2.1,0,4.3,0,6.4
+                                        c0,1.5-1.4,2.8-2.9,2.8C20.2,10.8,18.1,10.8,16,10.8z"></path>
+                                            <path d="M28.2,27.4c0-1-0.6-1.6-1.6-1.6c-0.5,0-1.7-0.1-2.1-0.6c-1.3-1.6-1.8-3.2-2.1-5.2c-0.4-2.4-0.3-3.8-0.4-6.2
+                                        c0-0.6,0-0.6-0.6-0.6c-3.7,0-7.3,0-11,0c-0.7,0-0.7,0-0.7,0.7c0,2.4,0,3.7-0.4,6.1c-0.3,1.9-0.8,3.8-2.2,5.3
+                                        c-0.3,0.3-1.4,0.5-2,0.5c-1,0-1.6,0.6-1.6,1.6c0,0.9,0,1.8,0,2.8c0,1.2,0.6,1.8,1.8,1.8c3.5,0,7,0,10.4,0c3.5,0,7,0,10.5,0
+                                        c1.1,0,1.7-0.6,1.7-1.7C28.2,29.3,28.3,28.4,28.2,27.4z"></path>
+                                        </svg>
+                                        <svg viewBox="0 0 32 32" class="icon">
+                                            <title>Offense</title>
+                                            <g>
+                                                <rect x="2.1" y="28.1" width="7.1" height="3.9"></rect>
+                                                <path d="M9.1,7c0,0,0-0.5,0-0.7C8.6,1.5,5.6,0,5.6,0s-3,1.5-3.5,6.3c0,0.2,0,0.7,0,0.7v18.4h3.5h3.5V7z"></path>
+                                            </g>
+                                            <g>
+                                                <rect x="12.5" y="28.1" width="7.1" height="3.9"></rect>
+                                                <path d="M19.5,7c0,0,0-0.5,0-0.7C19,1.5,16,0,16,0s-3,1.5-3.5,6.3c0,0.2,0,0.7,0,0.7v18.4H16h3.5V7z"></path>
+                                            </g>
+                                            <g>
+                                                <rect x="22.9" y="28.1" width="7.1" height="3.9"></rect>
+                                                <path d="M29.9,7c0,0,0-0.5,0-0.7C29.4,1.5,26.4,0,26.4,0s-3,1.5-3.5,6.3c0,0.2,0,0.7,0,0.7v18.4h3.5h3.5V7z"></path>
+                                            </g>
+                                        </svg>
+
+                                        <h2 class="font-bold m-b-xs" id="profile-user-id"></h2>
+                                        <small>승리한 게임 <span id="profile-user-games-won"></span>회</small>
+                                        <div class="row m-t-md">
+                                            <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4 col-sm-offset-1">
+                                                <button class=" btn-block ladda-button btn btn-primary" id="profile-user-update-request-btn" data-style="slide-up">
+                                            <span class="ladda-label"><small><i class="fa fa-refresh"></i>  전적갱신<small></span>
+                                        </button>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4">
+                                                <button class="btn btn-white btn-block"><small><i class="fa fa-star"></i> 즐겨찾기</small></button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-5 m-t-md">
+                                        <small>동호회 경쟁전 순위</small>
+                                        <h3 class="product-main-price"><span id="profile-user-current-rank"></span>위 <small class="text-muted"><i class="fa fa-trophy"></i></small>                                            <span><small class="text-danger" id="profile-user-current-rank-diff"></small> </span></h3>
+
+                                    </div>
+                                    <hr class="competitive">
+                                    <div class="col-md-7 m-t-md competitive">
+                                        <!--<div class="row">-->
+                                        <h4>최근 일주일 경쟁전 결과</h4>
+                                        <div id="morris-bar-chart" class="profile-chart"></div>
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <hr>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <h4>포지션</h4>
+                                        <ul class="tag-list" style="padding: 0">
+                                            <li><a href=""><i class="fa fa-tag"></i> Tank</a></li>
+                                            <li><a href=""><i class="fa fa-tag"></i> Flex</a></li>
+                                            <li><a href=""><i class="fa fa-tag"></i> Support</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="ibox-footer">
+                                최근 갱신시간
+                                <span class="pull-right"><i class="fa fa-clock-o"></i> 14.04.2016 10:04 pm
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-b-lg m-t-lg">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                            <label class="btn btn-primary">
+                    <input type="radio" name="options" autocomplete="off" value="competitive" id="profile-user-competitive-btn"><i class="fa fa-diamond"></i> 경쟁전
+                </label>
+                            <label class="btn btn-primary">
+                    <input type="radio" name="options" autocomplete="off" value="quickplay" id="profile-user-quickplay-btn"><i class="fa fa-rocket"></i> 빠른대전
+                </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-b-lg m-t-lg">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                        <!-- 사용자정보 -->
+                        <div class="widget navy-bg p-lg text-center float-e-margins competitive">
+                            <div class="m-b-sm">
+                                <img class="profile-image-rank-picture" id="profile-user-rank-picture" />
+                                <h1 class="m-xs" id="profile-user-rank"></h1>
+                                <p class="m-xs" id="profile-user-position"> </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 competitive">
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <h5>승률</h5>
+                                        <h1 class="no-margins font-bold text-navy number-float" id="profile-user-win-rate">61%</h1>
+                                        <div class="stat-percent font-bold" id="profile-user-win-rate-diff"></div>
+                                        <small>총 게임 </small> <small id="profile-user-games-played"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <h5>목숨당처치</h5>
+                                        <h1 class="no-margins font-bold text-navy number-float" id="profile-user-kda">3.1</h1>
+                                        <div class="stat-percent font-bold" id="profile-user-kda-diff"></div>
+                                        <small>총 처치 수 </small> <small id="profile-user-eliminations"> </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <h5>준피해-평균</h5>
+                                        <h1 class="no-margins font-bold text-navy number-int" id="profile-user-damage-done-average">10205</h1>
+                                        <div class="stat-percent font-bold" id="profile-user-damage-done-average-diff"></div>
+                                        <small>총 데미지 </small> <small id="profile-user-damage-done">2323</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <h5>치유-평균</h5>
+                                        <h1 class="no-margins font-bold text-navy number-int" id="profile-user-healing-done-average">6075</h1>
+                                        <div class="stat-percent font-bold" id="profile-user-healing-done-average-diff"></div>
+                                        <small>총 치유</small> <small class="number-int" id="profile-user-healing-done">303030</small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>영웅정보</h5>
+                                        <div class="ibox-tools">
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <i class="fa fa-wrench"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-user">
+                                                <li><a href="#">Config option 1</a>
+                                                </li>
+                                                <li><a href="#">Config option 2</a>
+                                                </li>
+                                            </ul>
+                                            <a class="close-link">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="ibox-content" profile-info="profile-info">
+                                        <div class="row m-md">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <select class="select2_demo_3 form-control no-paddings">
+                                            <option></option>
+                                            <option value="Bahamas">플레이시간</option>
+                                            <option value="Bahrain">승률</option>
+                                            <option value="Bangladesh">목숨당처치</option>
+                                            <option value="Barbados">준피해</option>
+                                            <option value="Belarus">치유</option>
+                                        </select>
+                                            </div>
+                                        </div>
+                                        <div id="profile-info-container"></div>
+                                        <div class="user-button m-t-sm ">
+                                            <div class="row">
+                                                <div class="col-md-6 col-md-offset-3 ">
+                                                    <button type="button " class="btn btn-primary btn-sm btn-block" data-toggle="collapse" data-target=".time-line-collapsed"><i class="fa fa-plus-square "></i>&nbsp;모두 보기</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- 사용자정보 끝 -->
+                    </div>
+                    <!-- 팀 정보 -->
+                    <!-- 팀 정보 끝 -->
+
+                </div>
+            </div>
+        </div>
+        <!-- The new page dummy; this would be dynamically loaded content -->
+        <div class="container" id="page-2">
+            <section>
+                <h2>This is an example for a new page.</h2>
+                <p><a class="pageload-link" href="#page-1">Go back</a></p>
+            </section>
+        </div>
+        <!-- /container -->
+
+        <div id="loader" class="pageload-overlay" data-opening="M 0,0 80,-10 80,60 0,70 0,0" data-closing="M 0,-10 80,-20 80,-10 0,0 0,-10">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+                <path d="M 0,70 80,60 80,80 0,80 0,70" />
+            </svg>
+        </div>
+        <!-- /pageload-overlay -->
+
+    </div>
+
+    <script>
+        window.onload = function () {
+            $('head').append('<script src=\'/js/app/app.profile.js\'><\/script>');
+            $('head').append('<script src=\'/js/app/app.pageloading.js\'><\/script>');
+        }
+    </script>

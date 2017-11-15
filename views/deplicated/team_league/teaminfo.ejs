@@ -1,0 +1,185 @@
+<% layout('/layout') 
+   var team_avg = 0;
+   var team_count = 0;
+%>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>리그</strong></h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/league/dashboard">홈</a>
+                </li>
+                <li>
+                    <a href="/league/dashboard">리그</a>
+                </li>
+                <li>
+                    <a href="/league/team">팀정보</a>
+                </li>
+                <li class="active">
+                    <strong>팀세부정보</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="row m-t-lg">
+    </div>
+    <% 
+
+    var icon = {
+        support: '<svg viewBox="0 0 32 32" role="presentation" class="teaminfo-portrait-desc-icon"><title>Support</title><path fill-rule="evenodd" d="M29.3,10.2h-7.5V2.7c0-1.5-1.2-2.7-2.7-2.7h-6.3c-1.5,0-2.7,1.2-2.7,2.7v7.5H2.7c-1.5,0-2.7,1.2-2.7,2.7v6.3c0,1.5,1.2,2.7,2.7,2.7h7.5v7.5c0,1.5,1.2,2.7,2.7,2.7h6.3c1.5,0,2.7-1.2,2.7-2.7v-7.5h7.5c1.5,0,2.7-1.2,2.7-2.7v-6.3C32,11.4,30.8,10.2,29.3,10.2z"></path></svg>',
+        tank: '<svg viewBox="0 0 32 32" role="presentation" class="teaminfo-portrait-desc-icon"><title>Tank</title><path d="M29,10.7c0,2.1,0,4.1,0,6.2c0,0.6-0.1,1.1-0.4,1.6c-2.9,5.3-6.8,9.7-11.8,13.2c-0.6,0.4-1,0.4-1.6,0 c-4.9-3.4-8.8-7.8-11.7-13c-0.3-0.6-0.4-1.2-0.4-1.8c0-3.9,0.1-7.8,0-11.7C3,2.3,5.2,1.9,7.1,1.4C10.4,0.6,13.3,0,16.6,0 c3.1,0,7.7,1.1,9.4,1.6c1.3,0.4,2.7,0.9,2.9,2.2C29,4.9,28.9,6,29,7.1C29,8.3,29,9.5,29,10.7C29,10.7,29,10.7,29,10.7z"></path></svg>',
+        defense: '<svg viewBox="0 0 32 32" role="presentation" class="teaminfo-portrait-desc-icon"><title>Defense</title><path d="M16,10.8c-2,0-4,0-6.1,0c-1.7,0-3.1-1.4-3.1-3.1c0-2,0-3.9,0-5.9c0-1,0.8-1.8,1.7-1.8c0.3,0-0.1,0,0.2,0 C10,0,9.9,1.3,9.9,1.6c0,0.7,0,0.3,0,1c0,0.3,0.1,0.4,0.4,0.4c0.7,0,1.5,0,2.2,0c0.2,0,0.4-0.2,0.4-0.4c0-0.4,0-0.8,0-1.2 c0-0.8,0.7-1.4,1.4-1.4c1.4,0,2,0,3.4,0c1.1,0,1.4,1.2,1.3,1.5c0,0.7,0,0.4,0,1.1c0,0.3,0.1,0.5,0.5,0.5c0.7,0,1.4,0,2.1,0 c0.4,0,0.5-0.1,0.5-0.5c0-0.7,0-0.7,0-1.4c0-0.3,0.1-1.2,1.3-1.2c0.4,0-0.1,0,0.4,0c0.8,0,1.4,0.7,1.4,1.5c0,2.1,0,4.3,0,6.4 c0,1.5-1.4,2.8-2.9,2.8C20.2,10.8,18.1,10.8,16,10.8z"></path> <path d="M28.2,27.4c0-1-0.6-1.6-1.6-1.6c-0.5,0-1.7-0.1-2.1-0.6c-1.3-1.6-1.8-3.2-2.1-5.2c-0.4-2.4-0.3-3.8-0.4-6.2 c0-0.6,0-0.6-0.6-0.6c-3.7,0-7.3,0-11,0c-0.7,0-0.7,0-0.7,0.7c0,2.4,0,3.7-0.4,6.1c-0.3,1.9-0.8,3.8-2.2,5.3 c-0.3,0.3-1.4,0.5-2,0.5c-1,0-1.6,0.6-1.6,1.6c0,0.9,0,1.8,0,2.8c0,1.2,0.6,1.8,1.8,1.8c3.5,0,7,0,10.4,0c3.5,0,7,0,10.5,0 c1.1,0,1.7-0.6,1.7-1.7C28.2,29.3,28.3,28.4,28.2,27.4z"></path> </svg>',
+        offense: '<svg viewBox="0 0 32 32" class="teaminfo-portrait-desc-icon"><title>Offense</title><g><rect x="2.1" y="28.1" width="7.1" height="3.9"></rect><path d="M9.1,7c0,0,0-0.5,0-0.7C8.6,1.5,5.6,0,5.6,0s-3,1.5-3.5,6.3c0,0.2,0,0.7,0,0.7v18.4h3.5h3.5V7z"></path></g><g><rect x="12.5" y="28.1" width="7.1" height="3.9"></rect><path d="M19.5,7c0,0,0-0.5,0-0.7C19,1.5,16,0,16,0s-3,1.5-3.5,6.3c0,0.2,0,0.7,0,0.7v18.4H16h3.5V7z"></path></g><g><rect x="22.9" y="28.1" width="7.1" height="3.9"></rect><path d="M29.9,7c0,0,0-0.5,0-0.7C29.4,1.5,26.4,0,26.4,0s-3,1.5-3.5,6.3c0,0.2,0,0.7,0,0.7v18.4h3.5h3.5V7z"></path></g></svg>',
+
+    }
+%>
+        <div class="row" team-info-member="team-info-member">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-white member-info-view-button"> <i class="fa fa-user"></i> </button>
+                        <button type="button" class="btn btn-sm btn-white member-info-view-button"> <i class="fa fa-list"></i> </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 m-t-md collapse">
+                <div class="slick_demo_2 teaminfo-member-slick">
+                    <% for(var i = 0; i < teaminfo.team_member_info.length;i++){ %>
+                        <% if(teaminfo.team_member_info[i].user_info_hasCompetitive) { 
+                        var portrait = teaminfo.team_member_info[i].user_info_competitive.order[0].name;
+                        var position = teaminfo.team_member_info[i].user_info_competitive.data[portrait].position;
+                        var r = teaminfo.team_member_info[i].user_info_profile.rank;
+                        } 
+                    %>
+                            <div class="teaminfo-member-portrait-bg bg-portrait-<%=portrait%>">
+                                <span class="teaminfo-member-portrait-span" />
+                                <div class="teaminfo-portrait-desc">
+                                    <h2>
+                                        <span>
+                                            <%-icon[position]%>
+                                    </span>
+                                        <strong><%=teaminfo.team_member_info[i].user_info_id%></strong>
+                                    </h2>
+                                </div>
+                            </div>
+                            <% } %>
+
+                </div>
+            </div>
+        </div>
+        <div class="row" id="member-info-list-view">
+            <% team_count = teaminfo.team_member_info.length;
+               for(var i = 0; i < teaminfo.team_member_info.length;i++){
+                    var match_info = (teaminfo.team_member_info[i].user_info_hasCompetitive)  ? teaminfo.team_member_info[i].user_info_competitive : teaminfo.team_member_info[i].user_info_quickplay;
+                    var portrait = match_info.order[0].name;
+                    var position = match_info.data[portrait].position;
+                    var r = teaminfo.team_member_info[i].user_info_profile.rank;
+                    team_avg += r;
+                    %>
+                <div class="col-xs-6">
+                    <div class="feed-element">
+                        <a href="/profile?id=<%=teaminfo.team_member_info[i].user_info_id.toRequestID()%>" class="pull-left">
+                                <img alt="image" class="img-circle" src="<%=teaminfo.team_member_info[i].user_info_profile.avatar%>">
+                            </a>
+                        <div class="media-body ">
+                            <small class="pull-right"><%-icon[position]%></small>
+                            <a href="/profile?id=<%=teaminfo.team_member_info[i].user_info_id.toRequestID()%>">
+                                <strong><%=toShortID(teaminfo.team_member_info[i].user_info_id)%></strong>
+                            </a>
+                            <p>
+                                <small class="text-muted"><%=match_info.data[portrait].display_name%><span class='user_role_level_1'>/<%=teaminfo.team_member_info[i].user_info_profile.rank%></span></small>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <% } %>
+
+        </div>
+        <div class="row" team-info-member="team-info-member">
+            <div class="col-lg-12">
+
+                <div class="ibox-title">
+                    <h5>팀 상세정보</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <h4><strong><%=teaminfo.team_info.teamname%></strong></h4>
+                    <p><i class="fa fa-clock-o "></i><small>&nbsp;&nbsp;다음 리그까지 남은 시간: 12시 15분</small></p>
+                    <table class="table small m-b-xs ">
+                        <tbody>
+                            <tr>
+                                <td><i class="fa fa-user "></i>&nbsp;&nbsp;팀장:
+                                    <%=teaminfo.team_info.teamleader%>
+                                </td>
+                                <td><i class="fa fa-users "></i>&nbsp;&nbsp;팀원:
+                                    <%=teaminfo.team_info.members%>명</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-trophy "></i>&nbsp;&nbsp;리그전적: 0전 0승 0패</td>
+                                <td class="user_role_level_2"><i class="fa fa-users "></i>&nbsp;&nbsp; 팀평균 :
+                                    <%=(team_avg/team_count).toFixed(1)%>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="activity-stream">
+                        <% for(var i = 0; i < teaminfo.team_activity.length;i++){ 
+                            var isAccept = teaminfo.team_activity[i].action == 2;
+                            %>
+                            <div class="stream">
+                                <div class="stream-badge">
+                                    <%- (!isAccept) ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-check bg-primary"></i>'%>
+                                </div>
+                                <div class="stream-panel">
+                                    <div class="stream-info">
+                                        <a href="/profile?id=<%=teaminfo.team_activity[i].action_from.replace('#','-')%>">
+                                        <img src="<%=teaminfo.team_activity[i].user_avatar%>" />
+                                        <span><%=teaminfo.team_activity[i].action_from%></span>
+                                        <span class="date"><i class="fa fa-clock-o"></i>  at <%= teaminfo.team_activity[i].timestamp%></span>
+                                    </a>
+                                    </div>
+                                    <%- (!isAccept) ? "가입요청을 하셨습니다." : "가입이 승인되었습니다." %>
+                                        <a class="user_role_level_2" href="/league/join_accept?user_id=<%=teaminfo.team_activity[i].action_from.replace('#','-')%>&team_id=<%=teaminfo.team_activity[i].action_to%>"
+                                            class="pull-right btn btn-xs btn-primary"><i class="fa fa-check"></i> 승인</a>
+                                </div>
+                            </div>
+                            <% } 
+                        //  01:32:40 am
+                        %>
+
+                    </div>
+
+                    <div class="row m-t-md guest-hide">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <button class="btn-block ladda-button btn btn-primary collapse" id="team-member-request-btn" data-style="slide-up">
+                        <span class="ladda-label"><small><i class="fa fa-sign-in"></i>  가입요청 <small></span>
+                    </button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row m-t-lg">
+            <span id="team-info-action-to" class="collapse"><%=teaminfo.team_info.teamid%></span>
+        </div>
+
+        <script>
+            window.onload = function () {
+                $('head').append(' <script src = \'/js/app/app.teaminfo.js\'> <\/script>');
+            }
+        </script>

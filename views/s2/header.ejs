@@ -1,0 +1,138 @@
+<header class="u-header u-header--sticky-top u-header--show-hide u-header--toggle-section">
+    <div class="g-bg-white g-transition-0_3 g-py-12 g-py-20--md g-brd-bottom g-brd-gray-light-v5">
+        <div class="container">
+            <a href="#" class="navbar-brand u-header__logo">
+                <div id="navbar_avatar" class="Author-avatar " style="background-image:url('<%= session.player.icon %>')"></div>
+                <span id="navbar_id" class="d-inline-block text-uppercase g-font-weight-700 g-font-size-14 g-color-main g-pt-10 g-pt-0--lg g-ml-10 g-valign-top"><%= session.battleTag.toDisplayID() %></span>
+            </a>
+        </div>
+
+        <div class="blog-open-nav blog-open-nav-arrow">
+            <span>toggle menu</span>
+        </div>
+
+    </div>
+</header>
+
+<nav class="" style="z-index:3000;background-image:url('/s2/assets/img/spex-assets/bg_stripe.jpg')">
+    <div class="blog-nav-header">
+        <div class="nav-component-wrapper">
+            <div class="justify-content-between g-px-25">
+                <div class="media">
+                    <div class="media-left d-flex u-block-hover g-pos-rel g-mr-20">
+                        <div class="d-inline-block g-width-95 g-height-95 g-brd-around g-brd-white g-bg-img-hero image-inner-shadow" style="background-image:url(<%= session.player.icon %>);"></div>
+                        <!-- Figure Caption -->
+                        <figcaption class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
+                            <div class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
+                                <!-- Figure Social Icons -->
+                                <ul class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
+                                    <li class="list-inline-item align-middle g-mx-7">
+                                        <a class="u-icon-v1 u-icon-size--md g-color-white" href="<%= session.player.overlog_link %>">
+                                            <img src="/s2/assets/img/overlog_icon.png">
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- End Figure Social Icons -->
+                            </div>
+                        </figcaption>
+                        <!-- End Figure Caption -->
+
+                        <% if (!(session.leagueInfo.accepted)){%>
+                            <span class="g-pos-abs g-top-20 g-left-0">
+                                <small class="d-block g-font-weight-600 g-bg-primary g-color-white g-pa-5">리그미참여</small>
+                            </span>
+                            <%}%>
+                    </div>
+
+                    <div class="media-body">
+                        <h6 class="g-font-size-30 g-color-white koverwatch-italic">
+                            <%= (session.battleTag) ? session.battleTag.toShortID() : '' %>
+                        </h6>
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item g-mr-20">
+                                <img class="g-width-24 g-mr-5" src="<%= (session.leagueInfo) ? session.leagueInfo.teamLogo : '' %>">
+                                <span class="g-font-weight-700 g-color-white koverwatch-normal"><%= (session.leagueInfo) ? session.leagueInfo.teamName : '' %></span>
+                            </li>
+                            <li class="list-inline-item g-mr-20">
+                                <img class="g-width-24 g-mr-5" src="<%= '/img/icons/rank-{0}.png'.format(session.competitiveInfo.tier.id) %>">
+                                <span class="g-font-weight-700 g-color-white koverwatch-normal"><%= session.competitiveInfo.max_score %></span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class=blog-close-nav>Close</div>
+    </div>
+    <div class="blog-nav-content">
+        <div class="nav-search">
+            <div class="input-group g-brd-primary--focus g-bg-white">
+                <span class="input-group-addon">
+                    <i class="fa fa-search"></i>
+                </span>
+                <input type=text id=search class="form-control form-control-md  g-brd-left-none">
+            </div>
+        </div>
+        <ul class="list-unstyled row g-pl-15 g-mr-0 ">
+            <li class="col-12 g-px-25 g-py-15">
+                <a href="/s2/" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <span class="fa fa-home g-mr-25 g-color-white g-font-size-18"></span>처음화면
+                </a>
+            </li>
+            <li class="col-12 g-px-25 g-py-15">
+                <a href="/s2/games" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <span class="fa fa-list g-mr-25 g-color-white g-font-size-18"></span>경기목록
+                </a>
+            </li>
+            <li class="col-12 g-px-20 g-py-15">
+                <a href="/s2/teamlist" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <svg viewbox="0 0 123.3 102.3" class="battle-ground-icon fill-white align-middle g-mr-15 ">
+                        <use xlink:href="/s2/assets/xml/icon-map-types.svg#deathmatch"></use>
+                    </svg>
+                    참여팀정보
+                </a>
+            </li>
+
+            <li class="col-12 g-px-25 g-py-15">
+                <a href="/s2/simulation" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <span class="fa fa-calculator g-mr-25 g-color-white g-font-size-18"></span>점수계산기
+                </a>
+            </li>
+            <li class="col-12 g-px-25 g-py-15 spex-level-99 spex-level-3 g-show-check">
+                <a href="/s2/stream" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <span class="fa fa-youtube g-mr-25 g-color-white g-font-size-18"></span>경기중계
+                </a>
+            </li>
+            <li class="col-12 g-px-25 g-py-15 spex-level-2 spex-level-3 g-show-check">
+                <a data-toggle="modal" data-target="#apiModal" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <span class="fa fa-magic g-mr-25 g-color-white g-font-size-18"></span>운영진API
+                </a>
+            </li>
+            <li class="col-12 g-px-25 g-py-15">
+                <a href="/s2/setting/<%= session.battleTag.toRequestID() %>" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <span class="fa fa-gear g-mr-25 g-color-white g-font-size-18"></span>설정
+                </a>
+            </li>
+            <li class="col-12 g-px-25 g-py-15">
+                <a id="sign_out_button" class="g-font-weight-600 g-font-size-16 g-color-gray-light-v3">
+                    <span class="fa fa-sign-out g-mr-25 g-color-white g-font-size-18"></span>로그아웃
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="component-logo">
+            <div class="d-block text-center">
+                <img class="g-grayscale-100x g-width-40" src="/s2/assets/img/spex-assets/spex_s01_circle_logo.png">
+                <span class="g-font-size-12 g-color-gray-dark-v3"><strong>삼성전자오버워치동호회리그</strong></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+<div class="blog-overlay" style="z-index:2999"></div>

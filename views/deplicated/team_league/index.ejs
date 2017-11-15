@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>삼성전자 오버워치 동호회</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <!-- Ladda -->
+    <link href="/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+
+
+</head>
+
+<body class="gray-bg">
+    <div hero-scene="hero-scene" class="animated fadeIn">
+        <div class="candy"></div>
+        <div id="hero-scene" class="scene">
+            <div class="layer left tracer"></div>
+            <div class="layer right widowmaker"></div>
+            <div class="layer left symmetra"></div>
+            <div class="layer right hanzo"></div>
+            <div class="layer left soldier-76"></div>
+            <div class="layer right mercy"></div>
+            <div class="layer left winston"></div>
+            <div class="layer right pharah"></div>
+            <div class="layer logo animated fadeInDown">
+
+                <div class="logo-text">
+                    <img src="/img/logo/logo-team-league.png" style="position:absolute;left:10%;top:3%;width:auto;height:60px">
+                    <small class="text-white"><strong> 오늘의 매치 </small>
+                    <%if (today_match!==undefined&&today_match.length>0 ){ %>
+                        <h3 class="text-white">
+                            <%=today_match[0].blue_team_name%> 대
+                                <%=today_match[0].red_team_name%>
+                                    </strong>
+                        </h3>
+                        <% } else { %>
+                            <h3 class="text-white"> 예정된 경기가 없습니다 </strong>
+                            </h3>
+                            <% }%>
+                </div>
+
+                <div class="logo-img">
+                    <img src="/img/logo/logo.png" class="img-circle index-logo" id="avatar">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <h3>방문을 환영합니다.</h3>
+            <p>배틀태그 조회 후 로그인해주세요.</p>
+            <div>
+                <!--<img src="/img/logo/logo.png" class="img-circle index-logo" id="avatar">-->
+            </div>
+
+            <form class="m-t" role="form" method="POST" id="form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="배틀태그" required id="input-battle-tag" name="user">
+                        <span class="input-group-btn">
+                             <button type="button" class="ladda-button btn btn-primary" id="battle-tag-search" data-style="slide-up">
+                                 <span class="ladda-label"><i class="fa fa-search"></i> 조회 </span></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password " class="form-control validate" placeholder="핀번호 4자리" name="password1" id="pin" disabled>
+                </div>
+                <div class="form-group signup" id="input-pin-enter-check">
+                    <input type="password " class="form-control validate" placeholder="핀번호 4자리 확인" name="password2" id="pin-recheck" disabled>
+                </div>
+                <input type="text" class="form-control" name="signup" id="signup" disabled style="display:none">
+
+                <div class="form-group">
+                    <label> <input type="checkbox" class="i-checks validate" id="input-pin-save-check" name="save" disabled>사용자 로그인 정보를 저장합니다. </label>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b validate" disabled id="form-submit"> <i class="fa fa-sign-in"></i> 로그인</button>
+
+                <p class="text-muted text-center"><small>&nbsp;&nbsp;사용자 정보를 입력하지 않으면 일부 기능이 제한되어 있습니다.<br> 사용자 정보 없이 이용 하시겠습니까?</small></p>
+                <a class="btn btn-sm btn-white btn-block" id="guest-login"> <i class="fa fa-sign-in"></i> 입장하기</a>
+            </form>
+            <p class="m-t"> <small><i class="fa fa-envelope-o"></i>rbitts@gmail.com &copy; 2017</small> </p>
+        </div>
+    </div>
+
+
+    <!-- Mainly scripts -->
+    <script src="/js/jquery-3.1.1.min.js "></script>
+    <script src="/js/bootstrap.min.js "></script>
+    <!-- JS Storage for Session -->
+    <script src="/s2/assets/js/storage.js"></script>
+
+    <!-- sign in script -->
+    <script src="/js/app.sign.in.js"></script>
+
+    <!-- Jquery Validate -->
+    <script src="/js/plugins/validate/jquery.validate.min.js "></script>
+    <!-- Sweet alert -->
+    <script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- iCheck -->
+    <script src="/js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Ladda -->
+    <script src='/js/plugins/ladda/spin.min.js'></script>
+    <script src='/js/plugins/ladda/ladda.min.js'></script>
+    <script src='/js/plugins/ladda/ladda.jquery.min.js'></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+    <script>
+        // validate
+        $(document).ready(function () {
+
+            $("#form").validate({
+                rules: {
+                    password1: {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 4,
+                        digits: true,
+                    },
+                    password2: {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 4,
+                        digits: true,
+                    }
+                }
+            });
+
+
+            // Bind normal buttons
+            Ladda.bind('.ladda-button', {
+                timeout: 20000
+            });
+
+            var l = $('#battle-tag-search').ladda();
+            l.click(function () {
+                // Start loading
+                l.ladda('start');
+                $("#avatar").removeClass("animated fadeIn");
+                $("#avatar").removeClass("");
+                var search_id = $("#input-battle-tag").val();
+
+                $.get("/user_search", {
+                    user_id: search_id,
+                }, function (response, status) {
+                    l.ladda('stop');
+                    if (Object.keys(response).length === 0) {
+                        return;
+                    }
+                    $("#avatar").attr("src", response.avatar);
+
+                    $("#avatar").addClass("animated fadeIn");
+                    $("#avatar").addClass("circle-border");
+                    $("#input-battle-tag").val(response.user_id);
+                    $("#signup").val(response.signup);
+                    if (!response.signup) {
+                        $(".signup").hide();
+                    } else {
+                        $(".signup").show();
+                    }
+
+                    $(".validate").removeAttr("disabled");
+
+                    console.log(response);
+                });
+                // Timeout example
+                // Do something in backend and then stop ladda
+                setTimeout(function () {
+                    l.ladda('stop');
+                }, 20000)
+            });
+
+        });
+    </script>
+</body>
+
+</html>

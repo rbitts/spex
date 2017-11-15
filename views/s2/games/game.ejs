@@ -1,0 +1,682 @@
+<%
+layout('/s2/layout'); 
+var dtime = new Date(info.date);
+var mdate = moment(new Date(info.date));
+%>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs g-bg-gray-light-v5 g-py-50">
+        <div class="container">
+            <div class="d-sm-flex text-center">
+                <div class="align-self-center">
+                    <h1 class="h3 g-font-weight-300 w-100 g-mb-10 g-mb-0--md">경기정보</h1>
+                </div>
+
+                <div class="align-self-center ml-auto">
+                    <ul class="u-list-inline">
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/">홈</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/games">경기</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-color-primary">
+                            <span>상세정보</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+
+    <section class="g-mt-50 g-mb-50">
+
+        <div class="container">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-60">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">리그전</h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">경기결과</h2>
+            </div>
+        </div>
+
+        <div class="container g-my-20">
+            <div class="spex-tour d-inline-block g-rounded-7 g-brd-around g-brd-gray-light-v3 g-brd-primary--hover g-color-gray-dark-v5 g-color-white--hover g-bg-primary--hover g-color-gray-light-v1 g-px-12 g-py-5">
+                <i class="fa fa-question mr-2"></i><span class="g-font-size-12 g-font-weight-700">도움말</span>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Profle Content -->
+                <div class="col-lg-12">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20" role="tablist"
+                        data-target="nav-1-1-default-hor-left-underline" data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
+                        <li class="nav-item">
+                            <a class="nav-link g-py-10 active" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--1" role="tab">경기정보</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2" role="tab">
+                                <%= spex.Team.get_sync(info.game_info.red_team.id).info.name %> 엔트리</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--3" role="tab">
+                                <%= spex.Team.get_sync(info.game_info.blue_team.id).info.name %> 엔트리</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--4" role="tab">라운드상세정보</a>
+                        </li>
+                    </ul>
+                    <!-- End Nav tabs -->
+
+                    <!-- Tab panes -->
+                    <div id="nav-1-1-default-hor-left-underline" class="tab-content">
+                        <!-- Edit Profile -->
+                        <div class="tab-pane fade show active" id="nav-1-1-default-hor-left-underline--1" role="tabpanel">
+                            <h2 class="h4 g-font-weight-600">경기 상세 정보를 확인해보세요.</h2>
+                            <p>경기 요약, 각 라운드 승패, 엔트리 등을 확인하실 수 있습니다.</p>
+
+                            <div class="form-group row align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-pb-15">
+                                <label class="col-sm-3 col-form-label align-items-center g-color-gray-dark-v2 g-font-weight-700">경기일시</label>
+                                <div class="col-sm-9">
+                                    <span class="align-center"> <%= mdate.format('YYYY년 MM월 DD일  HH시 mm분') %></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-pb-15">
+                                <label class="col-sm-3 col-form-label align-items-center g-color-gray-dark-v2 g-font-weight-700">참여팀1</label>
+                                <div class="col-sm-9">
+                                    <span class="align-center"> <%= spex.Team.get_sync(info.game_info.red_team.id).info.name %></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-pb-15">
+                                <label class="col-sm-3 col-form-label align-items-center g-color-gray-dark-v2 g-font-weight-700">참여팀2</label>
+                                <div class="col-sm-9">
+                                    <span class="align-center"> <%= spex.Team.get_sync(info.game_info.blue_team.id).info.name %></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-pb-15">
+                                <label class="col-sm-3 col-form-label align-items-center g-color-gray-dark-v2 g-font-weight-700">경기영상링크</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group js-edit-container" data-step="2" data-intro="경기진행을 끝낸 후 경기영상을 입력해주세요!">
+                                        <input class="js-edit-text form-control form-control-md border-0 rounded-0 g-py-13 pr-0 g-color-gray-dark-v3 g-font-weight-600 "
+                                            type="text" value="<%= info.media === undefined ? '미입력' : info.media %>" readonly>
+                                        <div class="input-group-addon d-flex align-items-center border-0 g-bg-white g-color-gray-dark-v3 g-color-primary--hover rounded-0 g-show-check spex-level-99 spex-level-3">
+                                            <i class="fa fa-pencil js-edit"></i>
+                                        </div>
+                                    </div>
+                                    <div class="input-group g-brd-primary--focus g-show-check js-save-container">
+                                        <input class="js-save-text form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="text" placeholder="경기영상 링크"
+                                            name="media" value="<%= info.media === undefined ? '' : info.media %>">
+                                        <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-color-primary--hover  rounded-0">
+                                            <i class="fa fa-save js-save"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <% 
+                            info.game_info.round_info.forEach((round, i)=> { 
+                                var map = spex.Map.get(round.battle_ground);
+                                var winner = round.teams.filter(function(t){
+                                    return t.won;
+                                })[0]
+                                %>
+
+                                <div class="form-group row g-pos-rel align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-pb-15">
+                                    <label class="col-sm-3 col-form-label align-items-center g-color-gray-dark-v2 g-font-weight-700 g-mb-20 g-mb-0--md">라운드<%= (i+1) %></label>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-12 col-md-4 g-mb-20 g-mb-0--md">
+                                                <img class="g-width-100x g-height-auto" src="<%= map.thumbnail %>" alt="<%= map.name %>">
+                                            </div>
+                                            <div class="col-12 col-md-8">
+                                                <h2 class="h4 g-color-black g-font-weight-600 "><i class="fa fa-map-marker mr-2"></i>
+                                                    <%= map.name %>
+                                                </h2>
+                                                <ul class="list-unstyled">
+                                                    <li class="d-inline-flex g-font-size-20 g-font-weight-700 g-color-primary"><span class="g-font-size-13 g-color-gray-dark-v5 g-mr-5"> 승리</span>
+                                                        <%= spex.Team.get_sync(winner.id).info.name %>
+                                                    </li>
+                                                    <li class="d-inline-flex g-font-size-16 g-color-gray-dark-v5 g-px-5">/</li>
+                                                    <li class="d-inline-flex g-font-size-20 g-font-weight-700 g-color-primary"><span class="g-font-size-13 g-color-gray-dark-v5 g-mr-5"> 최고의플레이</span>
+                                                        <%= round.potg %>
+                                                    </li>
+                                                </ul>
+
+                                                <ul class="list-unstyled">
+                                                    <li class="d-inline-block g-brd-around g-brd-gray-light-v3 g-brd-primary--hover g-color-gray-dark-v5 g-color-white--hover g-bg-primary--hover g-font-size-13 g-text-underline--none--hover g-rounded-25 g-transition-0_3 g-px-15 g-py-4">
+                                                        <svg viewbox="0 0 123.3 102.3" class="battle-ground-icon align-middle mr-2 mb-1">
+                                                            <use xlink:href="/s2/assets/xml/icon-map-types.svg#<%= map.mapTypes %>"></use>
+                                                        </svg>
+                                                        <%= map.mapTypesName %> 전장
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- options -->
+                                    <div class="g-brd-around g-brd-2 options-button g-brd-gray-dark-v4 g-brd-primary--hover g-pos-abs g-top-0 g-right-20 dropdown g-mb-0--md g-show-check spex-level-99 spex-level-3">
+                                        <span class="d-block g-color-primary--hover g-cursor-pointer g-pa-5-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-angle-down g-pos-rel g-top-1"></i>
+                                        </span>
+                                        <div class="dropdown-menu dropdown-menu-right rounded-0 g-mt-10">
+                                            <a class="dropdown-item g-px-10" href="/s2/game/round/write/<%= info.game_id %>/<%= (i+1) %>"><i class="icon-note g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> 수정</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item g-px-10" href="#"><i class="icon-ban g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> 삭제</a>
+                                        </div>
+                                    </div>
+                                    <!-- End options -->
+                                </div>
+                                <% }) %>
+                        </div>
+                        <!-- End Edit Profile -->
+
+                        <!-- Security Settings -->
+                        <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--2" role="tabpanel">
+                            <h2 class="h4 g-font-weight-600">
+                                <%= spex.Team.get_sync(info.game_info.red_team.id).info.name %> 엔트리</h2>
+                            <p class="g-mb-25">엔트리에 등록된 인원의 요약정보 및 상세정보를 확인하세요.</p>
+
+                            <div class="row">
+                                <% 
+                                    info.game_info.red_team.entry.forEach((member, i)=>{ 
+                                    if( member.accept ) {
+                                    var portrait = (member.detail.account.player.mostplay) ? '/img/vertical-portrait/{0}.png'.format(member.detail.account.player.mostplay) : '/s2/assets/img/120x120/img6.png';
+                                    %>
+                                    <div class="col-6 col-md-4 col-lg-3 g-mb-50">
+                                        <!-- Figure -->
+                                        <figure class="text-center">
+                                            <!-- Figure Image -->
+                                            <div class="mx-auto g-width-130 g-height-130 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                <div class="g-width-120 g-height-120 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(<%= portrait %>);">
+                                                </div>
+                                            </div>
+                                            <!-- End Figure Image -->
+                                            <!-- Figure Info -->
+                                            <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">
+                                                <%= member.member.toShortID() %>
+                                            </h4>
+                                            <p class="text-uppercase g-font-size-12">
+                                                <% if( member.detail.account.player.position.defense ) { %>
+                                                    <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                        <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#tank"></use>
+                                                    </svg>
+                                                    <% } if( member.detail.account.player.position.offense ) { %>
+                                                        <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                            <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#offense"></use>
+                                                        </svg>
+                                                        <% } if( member.detail.account.player.position.support ) { %>
+                                                            <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#support"></use>
+                                                            </svg>
+                                                            <% } %>
+                                                                <a href="<%= member.detail.account.player.overlog_link %>" target="__blank">
+                                                                    <img class="g-width-24 image-inner-shadow <%= (member.detail.account.player.overlog_link) ? '' : 'g-grayscale-100x' %>" src="/s2/assets/img/overlog_icon.png">
+                                                                </a>
+                                            </p>
+                                            <!-- End Info -->
+
+                                            <!-- Figure Body -->
+                                            <div class="d-inline-block">
+                                                <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                    <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-15 g-py-4">
+                                                        <img class="g-width-32" src="<%= '/img/icons/rank-{0}.png'.format(member.detail.competitive.tier)%>">
+                                                    </span>
+                                                    <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-15 g-py-8 g-px-15 g-px-15--md"><%= member.detail.competitive.max_score %></span>
+                                                </div>
+                                            </div>
+                                            <!-- End Figure Body -->
+                                        </figure>
+                                        <!-- End Figure -->
+                                    </div>
+                                    <%}})%>
+
+                            </div>
+
+
+                        </div>
+                        <!-- End Security Settings -->
+
+                        <!-- Payment Options -->
+                        <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--3" role="tabpanel">
+                            <h2 class="h4 g-font-weight-600">
+                                <%= spex.Team.get_sync(info.game_info.blue_team.id).info.name %> 엔트리</h2>
+                            <p class="g-mb-25">엔트리에 등록된 인원의 요약정보 및 상세정보를 확인하세요.</p>
+
+                            <div class="row">
+                                <% 
+                                    info.game_info.blue_team.entry.forEach((member, i)=>{ 
+                                    if( member.accept ) {
+                                    var portrait = (member.detail.account.player.mostplay) ? '/img/vertical-portrait/{0}.png'.format(member.detail.account.player.mostplay) : '/s2/assets/img/120x120/img6.png';
+                                    %>
+                                    <div class="col-6 col-md-4 col-lg-3 g-mb-50">
+                                        <!-- Figure -->
+                                        <figure class="text-center">
+                                            <!-- Figure Image -->
+                                            <div class="mx-auto g-width-130 g-height-130 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                <div class="g-width-120 g-height-120 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(<%= portrait %>);">
+                                                </div>
+                                            </div>
+                                            <!-- End Figure Image -->
+                                            <!-- Figure Info -->
+                                            <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">
+                                                <%= member.member.toShortID() %>
+                                            </h4>
+                                            <p class="text-uppercase g-font-size-12">
+                                                <% if( member.detail.account.player.position.defense ) { %>
+                                                    <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                        <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#tank"></use>
+                                                    </svg>
+                                                    <% } if( member.detail.account.player.position.offense ) { %>
+                                                        <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                            <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#offense"></use>
+                                                        </svg>
+                                                        <% } if( member.detail.account.player.position.support ) { %>
+                                                            <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#support"></use>
+                                                            </svg>
+                                                            <% } %>
+                                                                <a href="<%= member.detail.account.player.overlog_link %>" target="__blank">
+                                                                    <img class="g-width-24 image-inner-shadow <%= (member.detail.account.player.overlog_link) ? '' : 'g-grayscale-100x' %>" src="/s2/assets/img/overlog_icon.png">
+                                                                </a>
+                                            </p>
+                                            <!-- End Info -->
+
+                                            <!-- Figure Body -->
+                                            <div class="d-inline-block">
+                                                <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                    <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-15 g-py-4">
+                                                        <img class="g-width-32" src="<%= '/img/icons/rank-{0}.png'.format(member.detail.competitive.tier)%>">
+                                                    </span>
+                                                    <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-15 g-py-8 g-px-15 g-px-15--md"><%= member.detail.competitive.max_score %></span>
+                                                </div>
+                                            </div>
+                                            <!-- End Figure Body -->
+                                        </figure>
+                                        <!-- End Figure -->
+                                    </div>
+                                    <%}})%>
+
+                            </div>
+
+                        </div>
+                        <!-- End Payment Options -->
+
+                        <!-- Notification Settings -->
+                        <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--4" role="tabpanel">
+                            <h2 class="h4 g-font-weight-300">라운드 상세정보</h2>
+                            <p class="g-mb-25">각 라운드 엔트리, 최고의 플레이어, 전장 정보를 확인할 수 있습니다..</p>
+
+                            <div class="row g-px-40--lg g-py-70">
+                                <div class="col-12 col-md-4 mb-5">
+                                    <div class="">
+                                        <!-- Product Info -->
+                                        <div class="g-mb-30">
+                                            <div class="d-block">
+                                                <span class="h5 g-color-gray-dark-v3 g-font-size-13 g-font-weight-400"><i class="fa fa-map-marker mr-2"></i>전장</span>
+                                                <h2 class="g-font-weight-600 mb-4">네팔</h2>
+                                            </div>
+                                            <img class="g-width-100x g-height-auto" src="/img/battle-ground/1_nepal.jpg">
+                                        </div>
+                                        <!-- End Product Info -->
+
+                                        <!-- Price -->
+                                        <div class="g-mb-30">
+                                            <h2 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-12 text-uppercase mb-2">Price</h2>
+                                            <span class="g-color-black g-font-weight-500 g-font-size-30 mr-2">2400</span>
+                                            <s class="g-color-gray-dark-v4 g-font-weight-500 g-font-size-16">2500</s>
+                                        </div>
+                                        <!-- End Price -->
+
+                                        <!-- Accordion -->
+                                        <div id="accordion-01" role="tablist" aria-multiselectable="true">
+                                            <div id="accordion-01-heading-01" class="g-brd-y g-brd-gray-light-v3 py-3" role="tab">
+                                                <h5 class="g-font-weight-400 g-font-size-default mb-0">
+                                                    <a class="d-block g-color-gray-dark-v5 g-text-underline--none--hover" href="#accordion-01-body-01" data-toggle="collapse"
+                                                        data-parent="#accordion-01" aria-expanded="false" aria-controls="accordion-01-body-01">Details <span class="float-right g-pos-rel g-top-3 mr-1 fa fa-angle-down"></span></a>
+                                                </h5>
+                                            </div>
+                                            <div id="accordion-01-body-01" class="collapse" role="tabpanel" aria-labelledby="accordion-01-heading-01">
+                                                <div class="g-py-10">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Accordion -->
+
+                                        <!-- Quantity -->
+                                        <div class="d-flex justify-content-between align-items-center g-brd-bottom g-brd-gray-light-v3 py-3 g-mb-30" role="tab">
+                                            <h5 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-default mb-0">Quantity</h5>
+
+                                            <div class="js-quantity input-group u-quantity-v1 g-width-80 g-brd-primary--focus">
+                                                <input class="js-result form-control text-center g-font-size-13 rounded-0" type="text" value="1" readonly>
+
+                                                <div class="input-group-addon d-flex align-items-center g-width-30 g-bg-white g-font-size-13 rounded-0 g-pa-5">
+                                                    <i class="js-plus g-color-gray g-color-primary--hover fa fa-angle-up"></i>
+                                                    <i class="js-minus g-color-gray g-color-primary--hover fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Quantity -->
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-8">
+                                    <div class="row">
+                                        <div class="col-4 col-sm-3 col-lg-2 g-mb-50 g-mb-0--lg">
+                                            <!-- Figure -->
+                                            <figure class="text-center">
+                                                <!-- Figure Image -->
+                                                <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                    <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(/img/vertical-portrait/mccree.png);">
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Image -->
+                                                <!-- https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000008C3.png -->
+                                                <!-- Figure Info -->
+                                                <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">부모</h4>
+                                                <p class="text-uppercase g-font-size-12">Flex</p>
+                                                <!-- End Info -->
+
+                                                <!-- Figure Body -->
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                        <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                            <img class="g-width-28" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-6.png">
+                                                        </span>
+                                                        <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">3000</span>
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Body -->
+                                            </figure>
+                                            <!-- End Figure -->
+                                        </div>
+
+                                        <div class="col-4 col-sm-3 col-lg-2">
+                                            <!-- Figure -->
+                                            <figure class="text-center">
+                                                <!-- Figure Image -->
+                                                <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                    <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(/img/vertical-portrait/mccree.png);">
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Image -->
+                                                <!-- https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000008C3.png -->
+                                                <!-- Figure Info -->
+                                                <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">부모</h4>
+                                                <p class="text-uppercase g-font-size-12">Flex</p>
+                                                <!-- End Info -->
+
+                                                <!-- Figure Body -->
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                        <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                            <img class="g-width-28" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-6.png">
+                                                        </span>
+                                                        <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">3000</span>
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Body -->
+                                            </figure>
+                                            <!-- End Figure -->
+                                        </div>
+
+                                        <div class="col-4 col-sm-3 col-lg-2">
+                                            <!-- Figure -->
+                                            <figure class="text-center">
+                                                <!-- Figure Image -->
+                                                <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                    <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(/img/vertical-portrait/mccree.png);">
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Image -->
+                                                <!-- https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000008C3.png -->
+                                                <!-- Figure Info -->
+                                                <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">부모</h4>
+                                                <p class="text-uppercase g-font-size-12">Flex</p>
+                                                <!-- End Info -->
+
+                                                <!-- Figure Body -->
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                        <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                            <img class="g-width-28" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-6.png">
+                                                        </span>
+                                                        <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">3000</span>
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Body -->
+                                            </figure>
+                                            <!-- End Figure -->
+                                        </div>
+
+                                        <div class="col-4 col-sm-3 col-lg-2">
+                                            <!-- Figure -->
+                                            <figure class="text-center">
+                                                <!-- Figure Image -->
+                                                <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                    <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(/img/vertical-portrait/mccree.png);">
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Image -->
+                                                <!-- https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000008C3.png -->
+                                                <!-- Figure Info -->
+                                                <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">부모</h4>
+                                                <p class="text-uppercase g-font-size-12">Flex</p>
+                                                <!-- End Info -->
+
+                                                <!-- Figure Body -->
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                        <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                            <img class="g-width-28" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-6.png">
+                                                        </span>
+                                                        <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">3000</span>
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Body -->
+                                            </figure>
+                                            <!-- End Figure -->
+                                        </div>
+                                        <div class="col-4 col-sm-3 col-lg-2">
+                                            <!-- Figure -->
+                                            <figure class="text-center">
+                                                <!-- Figure Image -->
+                                                <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                    <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(/img/vertical-portrait/mccree.png);">
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Image -->
+                                                <!-- https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000008C3.png -->
+                                                <!-- Figure Info -->
+                                                <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">부모</h4>
+                                                <p class="text-uppercase g-font-size-12">Flex</p>
+                                                <!-- End Info -->
+
+                                                <!-- Figure Body -->
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                        <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                            <img class="g-width-28" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-6.png">
+                                                        </span>
+                                                        <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">3000</span>
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Body -->
+                                            </figure>
+                                            <!-- End Figure -->
+                                        </div>
+
+                                        <div class="col-4 col-sm-3 col-lg-2">
+                                            <!-- Figure -->
+                                            <figure class="text-center">
+                                                <!-- Figure Image -->
+                                                <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                    <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero" style="background-image:url(/img/vertical-portrait/mccree.png);">
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Image -->
+                                                <!-- https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000008C3.png -->
+                                                <!-- Figure Info -->
+                                                <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">부모</h4>
+                                                <p class="text-uppercase g-font-size-12">Flex</p>
+                                                <!-- End Info -->
+
+                                                <!-- Figure Body -->
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                        <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                            <img class="g-width-28" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-6.png">
+                                                        </span>
+                                                        <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">3000</span>
+                                                    </div>
+                                                </div>
+                                                <!-- End Figure Body -->
+                                            </figure>
+                                            <!-- End Figure -->
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- End Notification Settings -->
+                        </div>
+                        <!-- End Tab panes -->
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <br>
+    <!-- <section class="g-bg-secondary dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall"
+        data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "50"}'>
+        <div class="divimage dzsparallaxer--target w-100 g-bg-pos-center u-bg-overlay g-bg-black-opacity-0_7--after" style="height: 250%; background-image: url(/s2/assets/img/screenshot/sombra.jpg);"></div>
+
+        <div class="container">
+            <div class="row g-py-100">
+                <h2 class="h2 d-inline-block g-brd-around g-brd-2 g-theme-brd-blue g-theme-bg-blue g-theme-bg-blue--hover g-color-white g-font-weight-700 g-font-size-20 text-uppercase g-line-height-1_2 g-letter-spacing-3 g-py-12 g-px-20"><i class="icon-note mr-2"></i>라운드등록</h2>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="g-bg-secondary g-show-check spex-level-99 spex-level-3">
+        <div class="container">
+            <div class="row g-py-100 text-center">
+                <div class="col-12">
+                    <a data-step="1" data-intro="라운드 입력을 눌러 경기를 준비하세요!" href="/s2/game/round/write/<%= info.game_id %>" class="h2 d-inline-block g-brd-around g-brd-2 g-theme-brd-blue g-theme-bg-blue g-theme-bg-blue--hover g-color-white g-font-weight-700 g-font-size-20 text-uppercase g-line-height-1_2 g-letter-spacing-3 g-py-12 g-px-20 g-mr-20"><i class="icon-note mr-2"></i>라운드등록</a>
+                    <button data-step="3" data-intro="경기가 완료된 후 종료해주세요" data-spex-gid="<%= info.game_id %>" class="h2 d-inline-block g-brd-around g-brd-2 g-theme-brd-blue g-theme-bg-blue g-theme-bg-blue--hover g-color-white g-font-weight-700 g-font-size-20 text-uppercase g-line-height-1_2 g-letter-spacing-3 g-py-12 g-px-20 spex-game-done"><i class="icon-note mr-2"></i>종료</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.onload = function () {
+
+            toggleStylesheet('/s2/assets/vendor/intro/introjs.css', 1);
+            $('head').append(' <script src = \'/s2/assets/vendor/intro/intro.js\'> <\/script>');
+
+            $('.spex-tour').on('click', function (e) {
+
+                var tour = introJs()
+                tour.setOption('tooltipPosition', 'auto');
+                tour.setOption('positionPrecedence', ['left', 'right', 'bottom', 'top'])
+                tour.start()
+            });
+
+            $('.js-edit').on('click', function (e) {
+                $('.js-save-container').removeClass('g-show-check');
+                $('.js-edit-container').addClass('g-show-check');
+            });
+
+            $('.js-save').on('click', function (e) {
+                $.post('/api/modify/game/{0}'.format(<%= info.game_id %>), {
+                    media: $('.js-save-text').val()
+                }, function (response, status) {
+                    // console.log(response);
+                    if (response.success) {
+                        $('.js-edit-text').val(response.info.media);
+                    }
+                    $('.js-save-container').addClass('g-show-check');
+                    $('.js-edit-container').removeClass('g-show-check');
+                });
+            });
+
+            $('.spex-game-done').on('click', function (e) {
+                var $this = $(this);
+
+                var gid = $this.data('spex-gid');
+                if (gid) {
+
+                    $.confirm({
+                        icon: 'fa fa-question',
+                        theme: 'material',
+                        closeIcon: true,
+                        animation: 'scale',
+                        type: 'blue',
+
+                        title: '중계종료',
+                        content: '경기를 종료하시겠습니까?',
+                        buttons: {
+                            confirm: {
+                                text: '종료',
+                                btnClass: 'btn-blue',
+                                action: function () {
+                                    $.post('/api/modify/game/{0}/finish'.format(gid), {},
+                                        function (response, status) {
+                                            if (response.success) {
+                                                $.alert('경기를 종료하였습니다. 수고하셧습니다.');
+                                                window.location.href = "/s2";
+                                            } else {
+                                                $.alert('종료에 실패했습니다.');
+                                            }
+                                        });
+
+                                }
+                            },
+                            cancel: {
+                                text: '취소',
+                                action: function () {
+                                    // $.alert('Canceled!');
+                                },
+                            }
+
+
+                        }
+                    });
+
+                }
+
+                // var answer = confirm("경기를 종료하시겠습니까?")
+                // if (answer) {
+                //     var $this = $(this);
+
+                //     var gid = $this.data('spex-gid');
+
+                //     if (gid) {
+                //         $.post('/api/modify/game/{0}/finish'.format(gid), {}, function (response, status) {
+                //             if (response.success) {
+                //                 alert('경기를 종료하였습니다. 수고하셧습니다.');
+                //                 window.location.href = "/s2";
+                //             } else {
+                //                 alert('종료에 실패했습니다.');
+                //             }
+                //         });
+                //     }
+                // }
+            });
+
+        }
+    </script>

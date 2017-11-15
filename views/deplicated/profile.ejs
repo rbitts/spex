@@ -1,0 +1,119 @@
+<% layout('layout') %>
+    <div class="row" id="container-row" user-view-profile="user-view-profile">
+
+        <div class="row m-b-lg">
+            <span id="profile-id" class="collapse"><%=profile_id%></span>
+
+            <div class="col-lg-12 profile-portrait-bg">
+                <img class="profile-portrait-image" id="profile-user-current-image">
+
+                <div class="profile-summary">
+                    <h1 class="font-bold m-b-xs m-t-lg text-white" id="profile-user-id"></h1>
+                    <div class="profile-summary-rank">
+                        <img class="profile-image-rank-picture" id="profile-user-rank-picture" />
+                        <h3 class="m-xs" id="profile-user-rank"></h3>
+                    </div>
+                </div>
+
+
+                <ul class="profile-summary-more-info">
+                    <li>
+                        <h4><i class="fa fa-trophy"></i><span id="profile-user-current-rank"></span>위</h4>
+                    </li>
+                    <li><small class="text-danger" id="profile-user-current-rank-diff"></small></li>
+                    <li><span id="profile-user-position"> </span></li>
+                    <li><span id="profile-user-games-won"></span>회 승리</li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="row m-b-lg m-t-xs profile-padding-row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                <button class=" btn-block ladda-button btn btn-primary" id="profile-user-update-request-btn" data-style="slide-up">
+            <span class="ladda-label"><small><i class="fa fa-refresh"></i>  전적갱신<small></span>
+        </button>
+            </div>
+        </div>
+        <div class="row m-b-lg m-t-lg profile-padding-row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" autocomplete="off" value="competitive" id="profile-user-competitive-btn"><i class="fa fa-diamond"></i> 경쟁전
+                </label>
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" autocomplete="off" value="quickplay" id="profile-user-quickplay-btn"><i class="fa fa-rocket"></i> 빠른대전
+                </label>
+                </div>
+            </div>
+        </div>
+        <div class="row profile-padding-row">
+            <div class="col-md-7 m-t-md competitive">
+                <!--<div class="row">-->
+                <h4>최근 일주일 경쟁전 결과</h4>
+                <div id="morris-bar-chart" class="profile-chart"></div>
+                <!--</div>-->
+            </div>
+
+        </div>
+        <div class="row profile-padding-row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 competitive">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h5>승률</h5>
+                        <h1 class="no-margins font-bold text-navy number-float" id="profile-user-win-rate">61%</h1>
+                        <div class="stat-percent font-bold" id="profile-user-win-rate-diff"></div>
+                        <small>총 게임 </small> <small id="profile-user-games-played"></small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h5>목숨당처치</h5>
+                        <h1 class="no-margins font-bold text-navy number-float" id="profile-user-kda">3.1</h1>
+                        <div class="stat-percent font-bold" id="profile-user-kda-diff"></div>
+                        <small>총 처치 수 </small> <small id="profile-user-eliminations"> </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h5>준피해-평균</h5>
+                        <h1 class="no-margins font-bold text-navy number-int" id="profile-user-damage-done-average">10205</h1>
+                        <div class="stat-percent font-bold" id="profile-user-damage-done-average-diff"></div>
+                        <small>총 데미지 </small> <small id="profile-user-damage-done">2323</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h5>치유-평균</h5>
+                        <h1 class="no-margins font-bold text-navy number-int" id="profile-user-healing-done-average">6075</h1>
+                        <div class="stat-percent font-bold" id="profile-user-healing-done-average-diff"></div>
+                        <small>총 치유</small> <small class="number-int" id="profile-user-healing-done">303030</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-b-xs profile-row" id="profile-info-container"></div>
+
+        <div class="row m-b-lg profile-padding-row">
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-outline btn-block btn-primary" data-toggle='collapse' data-target=".time-line-collapsed"><i class="fa fa-plus-square-o"></i> 더 보기</button>
+            </div>
+        </div>
+        <div class="row m-b-lg" />
+
+    </div>
+
+    <script>
+        window.onload = function () {
+            $('head').append('<script src=\'/js/app/app.profile.js\'><\/script>');
+        }
+    </script>

@@ -1,0 +1,333 @@
+<% 
+layout('/s2/layout'); 
+var avg = 0;
+var avg_count = 0;
+%>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs g-bg-gray-light-v5 g-py-50">
+        <div class="container">
+            <div class="d-sm-flex text-center">
+                <div class="align-self-center">
+                    <h1 class="h3 g-font-weight-300 w-100 g-mb-10 g-mb-0--md">경기정보</h1>
+                </div>
+
+                <div class="align-self-center ml-auto">
+                    <ul class="u-list-inline">
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/">홈</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/games">경기</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-color-primary">
+                            <span>엔트리확정</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+
+
+    <section class="g-mt-50 g-mb-50 js-entry-selector">
+
+        <div class="container">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-60">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">팀장메뉴</h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">엔트리확정</h2>
+            </div>
+        </div>
+
+        <div class="container g-my-20">
+            <div class="spex-tour d-inline-block g-rounded-7 g-brd-around g-brd-gray-light-v3 g-brd-primary--hover g-color-gray-dark-v5 g-color-white--hover g-bg-primary--hover g-color-gray-light-v1 g-px-12 g-py-5 g-mr-5">
+                <i class="fa fa-question mr-2"></i>
+                <span class="g-font-size-12 g-font-weight-700">도움말</span>
+            </div>
+
+            <div class="d-inline-block g-rounded-7 g-brd-around g-brd-gray-light-v3 g-brd-primary--hover g-color-gray-dark-v5 g-color-white--hover g-bg-primary--hover g-color-gray-light-v1 g-px-12 g-py-5"
+                data-step="2" data-intro="선택된 팀원으로 가능한 조합을 확인하실 수 있습니다.">
+                <a data-toggle="modal" data-target="#entryBuilderModal">
+                    <i class="fa fa-gear mr-2"></i>
+                    <span class="g-font-size-12 g-font-weight-700">엔트리빌더</span>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="row" data-step="1" data-intro="경기에 참여할 엔트리 8명을 선택.">
+
+                <% info.game_info.entry_team.entry.forEach(function (m,i) {
+                                    var activeClass = ( !m.accept ) ? '' : 'activated';
+                                    if(m.accept) {
+                                        avg = avg + m.detail.competitive.max_score;
+                                        avg_count++;
+                                    }
+                                    var portrait = (m.detail.account.player.mostplay) ? '/img/vertical-portrait/{0}.png'.format(m.detail.account.player.mostplay) : '/s2/assets/img/120x120/img6.png';
+                                 %>
+                    <div class="js-entry-item col-4 col-sm-4 col-lg-3 g-mb-50 g-mb-30--lg">
+                        <!-- Figure -->
+                        <figure class="text-center">
+                            <!-- Figure Image -->
+                            <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                <div class="js-toggable g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero <%= activeClass %>" style="background-image:url(<%= portrait %>);"
+                                    data-label="<%= m.member %>" data-value="<%= m.detail.competitive.max_score %>" data-icon="<%= portrait %>">
+                                </div>
+                            </div>
+                            <!-- End Figure Image -->
+                            <!-- Figure Info -->
+                            <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">
+                                <%= m.member.toShortID() %>
+                            </h4>
+                            <p class="text-uppercase g-font-size-12">
+                                <% if( m.detail.account.player.position.defense ) { %>
+                                    <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                        <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#tank"></use>
+                                    </svg>
+                                    <% } if( m.detail.account.player.position.offense ) { %>
+                                        <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                            <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#offense"></use>
+                                        </svg>
+                                        <% } if( m.detail.account.player.position.support ) { %>
+                                            <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#support"></use>
+                                            </svg>
+                                            <% } %>
+                                                <a href="<%= m.detail.account.player.overlog_link %>" target="__blank">
+                                                    <img class="g-width-24 image-inner-shadow <%= (m.detail.account.player.overlog_link) ? '' : 'g-grayscale-100x' %>" src="/s2/assets/img/overlog_icon.png">
+                                                </a>
+                            </p>
+
+                            <!-- End Info -->
+
+                            <!-- Figure Body -->
+                            <div class="d-inline-block">
+                                <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                    <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                        <img class="g-width-28" src="<%= '/img/icons/rank-{0}.png'.format(m.detail.competitive.tier)%>">
+                                    </span>
+                                    <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">
+                                        <%= m.detail.competitive.max_score %>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- End Figure Body -->
+                        </figure>
+                        <!-- End Figure -->
+                    </div>
+
+
+                    <% }) %>
+
+
+            </div>
+        </div>
+
+    </section>
+    <section class="modal fade" id="entryBuilderModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">엔트리빌더 - 실험중</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row g-my-25">
+                        <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">목표평균</label>
+                        <div class="col-sm-9 g-mb-20">
+                            <div class="input-group rounded g-brd-primary--focus">
+                                <input class="form-control g-brd-gray-light-v1 g-brd-right-none g-color-gray-dark-v3 g-placeholder-gray-dark-v3" type="text"
+                                    placeholder="목표평균을 입력하세요." id="targetscore">
+                                <span class="input-group-addon g-brd-gray-light-v1 g-bg-white">
+                                    <button class="btn u-btn-primary rounded" id="requestBuild" type="button">조회</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="list-inline mb-0 pull-right">
+                                <li class="list-inline-item">
+                                    <a class="u-icon-v2 u-icon-size--xs g-color-primary g-brd-black--hover g-color-gray-dark-v5 g-color-black--hover clipboard"
+                                        data-clipboard-action="copy" data-clipboard-target="#entry-list-container">
+                                        <i class="fa fa-clipboard"></i>
+                                    </a>
+                                </li>
+
+                                <li class="list-inline-item">
+                                    <a class="u-icon-v2 u-icon-size--xs g-color-primary g-brd-black--hover g-color-gray-dark-v5 g-color-black--hover" id="view_type_list">
+                                        <i class="icon-list"></i>
+                                </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="u-icon-v2 u-icon-size--xs g-brd-gray-light-v3 g-brd-black--hover g-color-gray-dark-v5 g-color-black--hover" id="view_type_grid">
+                                        <i class="icon-grid"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" id='entry-list-container'></div>
+                    <div class="row" id='entry-container'></div>
+
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-warning" id="requestBuild">생성</button> -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="g-py-50 g-bg-secondary">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 g-mb-30 g-mb-0--md text-center" data-step="3" data-intro="선택된 엔트리의 평균값을 확인할 수 있습니다.">
+                    <h2 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-12 text-uppercase mb-2">평점평균</h2>
+                    <img class="entry-average-image g-width-40 align-bottom" src="/img/icons/rank-7.png">
+                    <span class="entry-average-label g-color-black g-font-weight-700 g-font-size-30 mr-2">
+                        <%= Math.round( avg / avg_count ) %>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <button class="entry-commit btn btn-block text-uppercase u-btn-black g-font-weight-700 g-font-size-11 g-color-white--hover g-bg-primary--hover g-brd-none rounded-0 g-py-18"
+                        data-step="4" data-intro="최종으로 엔트리를 확정지어주세요." type="button">확정</button>
+                </div>
+            </div>
+    </section>
+
+    <input class="g-show-check" type="text" name="gid" value="<%= info.game_id %>"></input>
+    <input class="g-show-check" type="text" name="tid" value="<%= info.game_info.entry_team.id %>"></input>
+
+
+    <script>
+        window.onload = function () {
+            $('head').append(' <script src = \'/s2/js/view/entry.js\'> <\/script>');
+            $('head').append(' <script src = \'/s2/js/view/entryBuilder.js\'> <\/script>');
+
+            toggleStylesheet('/s2/assets/vendor/intro/introjs.css', 1);
+            $('head').append(' <script src = \'/s2/assets/vendor/intro/intro.js\'> <\/script>');
+
+            $('.spex-tour').on('click', function (e) {
+
+                var tour = introJs()
+                tour.setOption('tooltipPosition', 'auto');
+                tour.setOption('positionPrecedence', ['left', 'right', 'bottom', 'top'])
+                tour.start()
+            });
+
+            $('#entryBuilderModal').on('shown', function () {
+                $('#entry-container').empty();
+            });
+
+            $('#view_type_list').on('click', function () {
+                $('.list').removeClass('collapse');
+                $('.grid').addClass('collapse');
+            });
+
+            $('#view_type_grid').on('click', function () {
+                $('.list').addClass('collapse');
+                $('.grid').removeClass('collapse');
+            });
+        }
+    </script>
+
+
+    <script id="game-entry-list-html-template" type="text/x-handlebars-template">
+        <div class="col-12 collapse list">
+            <p class="g-font-weight-700 g-font-size-12 g-color-black">{{entry1}}/{{entry2}}/{{entry3}}/{{entry4}}/{{entry5}}/{{entry6}} - {{average}}</p>
+        </div>
+    </script>
+
+    <script id="game-entry-html-template" type="text/x-handlebars-template">
+        <div class="form-group row g-mb-25 g-brd-bottom g-brd-gray-light-v4 g-my-40 g-mx-15 grid">
+            <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">평균: {{average}}</label>
+            <div class="col-sm-9 g-mb-20">
+                <div class="row">
+                    <div class="col-6 g-pos-rel">
+                        <ul class="list-inline g-mb-10">
+                            <li class="list-inline-item g-mr-10">
+                                <img class="g-width-40 g-height-40 rounded-circle image-fit-cover mr-2" src="{{icon1}}">
+                                <div class="d-inline-block g-valign-middle">
+                                    <span class="d-block g-color-main g-color-primary--hover g-font-size-12 g-font-weight-700">{{entry1}}</span>
+                                    <span class="d-block g-color-gray-dark-v5 g-font-size-12 g-color-primary--hover g-font-weight-700">{{score1}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-6 g-pos-rel">
+                        <ul class="list-inline g-mb-10">
+                            <li class="list-inline-item g-mr-10">
+                                <img class="g-width-40 g-height-40 rounded-circle image-fit-cover mr-2" src="{{icon2}}">
+                                <div class="d-inline-block g-valign-middle">
+                                    <span class="d-block g-color-main g-color-primary--hover g-font-size-12 g-font-weight-700">{{entry2}}</span>
+                                    <span class="d-block g-color-gray-dark-v5 g-font-size-12 g-color-primary--hover g-font-weight-700">{{score2}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 g-pos-rel">
+                        <ul class="list-inline g-mb-10">
+                            <li class="list-inline-item g-mr-10">
+                                <img class="g-width-40 g-height-40 rounded-circle image-fit-cover  mr-2" src="{{icon3}}">
+                                <div class="d-inline-block g-valign-middle">
+                                    <span class="d-block g-color-main g-color-primary--hover g-font-size-12 g-font-weight-700">{{entry3}}</span>
+                                    <span class="d-block g-color-gray-dark-v5 g-font-size-12 g-color-primary--hover g-font-weight-700">{{score3}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 g-pos-rel">
+                        <ul class="list-inline g-mb-10">
+                            <li class="list-inline-item g-mr-10">
+                                <img class="g-width-40 g-height-40 rounded-circle image-fit-cover mr-2" src="{{icon4}}">
+                                <div class="d-inline-block g-valign-middle ">
+                                    <span class="d-block g-color-main g-color-primary--hover g-font-size-12 g-font-weight-700">{{entry4}}</span>
+                                    <span class="d-block g-color-gray-dark-v5 g-font-size-12 g-color-primary--hover g-font-weight-700">{{score4}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 g-pos-rel">
+                        <ul class="list-inline g-mb-10">
+                            <li class="list-inline-item g-mr-10">
+                                <img class="g-width-40 g-height-40 rounded-circle image-fit-cover mr-2" src="{{icon5}}">
+                                <div class="d-inline-block g-valign-middle ">
+                                    <span class="d-block g-color-main g-color-primary--hover g-font-size-12 g-font-weight-700">{{entry5}}</span>
+                                    <span class="d-block g-color-gray-dark-v5 g-font-size-12 g-color-primary--hover g-font-weight-700">{{score5}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-6 g-pos-rel">
+                        <ul class="list-inline g-mb-10">
+                            <li class="list-inline-item g-mr-10">
+                                <img class="g-width-40 g-height-40 rounded-circle image-fit-cover mr-2" src="{{icon6}}">
+                                <div class="d-inline-block g-valign-middle ">
+                                    <span class="d-block g-color-main g-color-primary--hover g-font-size-12 g-font-weight-700">{{entry6}}</span>
+                                    <span class="d-block g-color-gray-dark-v5 g-font-size-12 g-color-primary--hover g-font-weight-700">{{score6}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </script>

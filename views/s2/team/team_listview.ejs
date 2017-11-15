@@ -1,0 +1,82 @@
+<% layout('/s2/layout'); %>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs g-bg-gray-light-v5 g-py-50">
+        <div class="container">
+            <div class="d-sm-flex text-center">
+                <div class="align-self-center">
+                    <h1 class="h3 g-font-weight-300 w-100 g-mb-10 g-mb-0--md">
+                        참여팀정보
+                    </h1>
+                </div>
+
+                <div class="align-self-center ml-auto">
+                    <ul class="u-list-inline">
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2">홈</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-color-primary">
+                            <span>참여팀정보</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+
+    <section class="container g-pt-100">
+        <div class="container">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-60">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">
+                    SPEX SEASON2
+                </h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">
+                    팀정보</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row align-items-stretch">
+                <% _(info.teams).each(function(team){ %>
+                    <div class="col-md-4 g-mb-30 g-mb-0--md">
+                        <!-- Article -->
+                        <article class="h-100 text-center text-uppercase g-flex-middle g-color-white bg-size-cover" data-bg-img-src="/s2/assets/img/spex-assets/bg_stripe.jpg">
+                            <div class="u-block-hover bg-size-cover u-bg-img-hero info-v3-2 g-py-100 g-px-30 g-bg-black-opacity-0_8--before" data-bg-img-src="<%= team.info.logo %>">
+                                <div class="g-flex-middle-item g-pos-rel g-z-index-2">
+                                    <!-- Article Title -->
+                                    <h3 class="g-letter-spacing-5 g-font-weight-700 g-color-white g-mb-20">
+                                        <%= team.info.name %>
+                                    </h3>
+                                    <!-- End Article Title -->
+                                    <em class="d-block g-letter-spacing-1 g-font-weight-400 g-font-style-normal g-mb-40"><i class="fa fa-quote-left mx-2"></i><%= team.info.comment %><i class="fa fa-quote-right mx-2"></i></em>
+                                    <em class="d-block g-theme-color-gray-light-v1 g-font-style-normal g-font-weight-600 g-font-size-12 g-mb-7">
+                                        <i class="icon-user mr-2"></i><%= team.info.leader.toShortID() %> <i class="icon-people mx-2"></i> <%= team.info.members %>명
+                                        
+                                </em>
+                                    <em class="d-block g-theme-color-gray-light-v1 g-font-style-normal g-font-weight-600 g-font-size-12 g-mb-30">
+                                    <i class="icon-trophy mr-2"></i><%= '{0}위'.format(team.info.score.rank) %>
+                                    <svg viewbox="0 0 123.3 102.3" class="battle-ground-icon fill-white g-width-20 align-middle mx-2">
+                                        <use xlink:href="/s2/assets/xml/icon-map-types.svg#control"></use>
+                                    </svg>
+                                    <%= '{0}승 {1}패'.format(team.info.score.won, team.info.score.lost) %>
+                                </em>
+                                    <a class="btn btn-md u-btn-outline-white g-font-size-12 g-brd-2 rounded-0 g-px-25" href="/s2/teaminfo/<%= team.teamid %>"><i class="fa fa-search mr-2"></i>팀세부정보</a>
+                                </div>
+                            </div>
+
+                        </article>
+                        <!-- End Article -->
+                    </div>
+                    <% })%>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        window.onload = function () {
+            // $('head').append(' <script src = \'/s2/js/view/teaminfo.js\'> <\/script>');
+        }
+    </script>

@@ -1,0 +1,148 @@
+<%
+var recentGame = (pdata.recentGame)? pdata.recentGame : {};
+var dtime = new Date(recentGame.date);
+var dString = moment(recentGame.date).format("YYYY년 MM월 DD일 HH시 mm분");
+ //console.log(recentGame.game_info.red_team.history);
+var TeamRED = spex.Team.get_sync(recentGame.game_info.red_team.id);
+var TeamBLUE = spex.Team.get_sync(recentGame.game_info.blue_team.id);
+%>
+    <!-- Promo Block -->
+    <section class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall" data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "150"}'>
+        <div class="divimage dzsparallaxer--target w-100 g-bg-pos-bottom-center u-bg-overlay g-bg-black-opacity-0_7--after" style="height: 120%; background-image: url(/s2/assets/img/league_large_poster.jpg);"></div>
+
+        <div class="container g-color-white g-pt-100 g-pb-65">
+
+            <h2 class="text-center text-uppercase h2 g-font-weight-700 g-font-size-20 g-font-size-30--md g-color-white">
+                다음경기
+            </h2>
+
+
+            <div class="row g-mb-30">
+                <div class="col-md-6">
+                    <div class="media g-mb-30">
+                        <div class="media-left d-flex g-pos-rel g-mr-20 hidden-md-up">
+                            <img class="g-height-120 g-brd-around g-brd-black g-brd-1 image-inner-shadow" src="<%=TeamRED.info.logo%>">
+                        </div>
+
+                        <div class="media-body text-uppercase text-md-right">
+                            <h2 class="text-uppercase h2 g-font-weight-700 g-font-size-40 g-font-size-60--md g-color-white">
+                                <%=TeamRED.info.name%>
+                            </h2>
+                            <span><i class="fa fa-trophy mr-2"></i>현재 리그 순위
+                                <%=recentGame.game_info.red_team.rank.rank%>위</span>
+                            <ul class="list-unstyled">
+                                <li class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 hidden-md-up">최근경기</li>
+                                <% 
+                                recentGame.game_info.red_team.history.forEach(h=>{
+                                    var className = h.won ? 'g-bg-blue': 'g-bg-red';
+                                    var historyText = h.won ? '승': '패';
+                                %>
+                                    <li class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 <%= className %>">
+                                        <%= historyText %>
+                                    </li>
+                                    <% }) %>
+                                        <li class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 hidden-sm-down">최근경기</li>
+                            </ul>
+                        </div>
+                        <div class="media-right d-flex g-pos-rel g-ml-20 hidden-sm-down">
+                            <img class="g-height-120 g-brd-around g-brd-black g-brd-1 image-inner-shadow" src="<%=TeamRED.info.logo%>">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="media g-mb-30">
+                        <div class="media-left d-flex g-pos-rel g-mr-20">
+                            <img class="g-height-120 g-brd-around g-brd-black g-brd-1 image-inner-shadow" src="<%=TeamBLUE.info.logo%>">
+                        </div>
+
+                        <div class="media-body text-uppercase">
+                            <h2 class="text-uppercase h2 g-font-weight-700 g-font-size-40 g-font-size-60--md g-color-white">
+                                <%=TeamBLUE.info.name%>
+                            </h2>
+                            <span><i class="fa fa-trophy mr-2"></i>현재 리그 순위
+                                        <%=recentGame.game_info.blue_team.rank.rank%>위</span>
+                            <ul class="list-unstyled">
+                                <li class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5">최근경기</li>
+                                <% 
+                                    recentGame.game_info.blue_team.history.forEach(h=>{
+                                        var className = h.won ? 'g-bg-blue': 'g-bg-red';
+                                        var historyText = h.won ? '승': '패';
+                                    %>
+                                    <li class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 <%= className %>">
+                                        <%= historyText %>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-center text-uppercase h2 g-font-weight-700 g-font-size-20 g-font-size-30--md g-color-white g-mb-30">
+                경기까지
+            </h2>
+
+            <!-- Countdown v4 -->
+            <div class="js-countdown text-center text-uppercase u-countdown-v4 g-mb-40 g-mb-70--md" data-end-date="<%=recentGame.dateString%>"
+                data-month-format="%m" data-days-format="%D" data-hours-format="%H" data-minutes-format="%M" data-seconds-format="%S">
+
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-days g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">12</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">일</span>
+                </div>
+
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-hours g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">01</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">시간</span>
+                </div>
+
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-minutes g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">52</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">분</span>
+                </div>
+
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-seconds g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">52</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">초</span>
+                </div>
+
+            </div>
+            <!-- End Countdown v4 -->
+
+            <div class="row g-mx-minus-5">
+                <div class="col-md-4 g-px-5 g-mb-20 g-mb-0--md">
+                    <div class="media">
+                        <div class="media-left d-flex align-self-center g-mr-20">
+                            <i class="fa fa-calendar g-font-size-27 g-color-white-opacity-0_5"></i>
+                        </div>
+
+                        <div class="media-body text-uppercase">
+                            <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">경기일시</strong></p>
+                            <h3 class="h3 text-uppercase g-font-size-15 g-color-white mb-0">
+                                <%=dString%>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 g-px-5 g-mb-20 g-mb-0--md">
+                    <div class="media">
+                        <div class="media-left d-flex align-self-center g-mr-20">
+                            <i class="fa fa-youtube g-font-size-27 g-color-white-opacity-0_5"></i>
+                        </div>
+
+                        <div class="media-body text-uppercase">
+                            <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">중계채널</strong></p>
+                            <h3 class="h3 text-uppercase g-font-size-15 g-color-white mb-0">삼팩스 공식중계 채널</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-md-right g-px-5">
+                    <a class="btn btn-lg text-uppercase u-btn-white g-font-weight-700 g-font-size-11 g-color-white--hover g-bg-primary--hover g-brd-none rounded-0 g-py-18"
+                        href="/s2/game/preview/<%= recentGame.game_id %>">경기상세정보</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Promo Block -->

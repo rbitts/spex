@@ -1,0 +1,91 @@
+<% 
+layout('/layout') 
+
+String.prototype.toDate= function ()  {
+    return this.substring(0,4) + '년 ' + this.substring(5,7) + '월 ' + this.substring(8,10)+'일';
+}
+
+String.prototype.toTime= function ()  {
+    return (this.substring(0,2) >= 12) ? '오후 '+ (this.substring(0,2) - 12) + '시 ' + this.substring(3,5)+'분' : '오전 '+ this.substring(0,2) + '시 ' + this.substring(3,5)+'분';
+}
+
+//console.log(game_info[0]);
+%>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>내전정보</strong></h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/league/dashboard">홈</a>
+                </li>
+                <li class="active">
+                    <strong>경기기록</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row m-b-lg user_role_level_2">
+
+            <a href="/league/create_game" class="btn btn-white btn-bitbucket pull-right">
+                <i class="fa fa-check-circle-o"></i> 경기생성
+            </a>
+        </div>
+
+        <div class="row" league-game-info="league-game-info">
+            <% for(var i = 0; i < game_info.length;i++ ){ %>
+
+                <div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+                            <div class="product-imitation scream-battle-ground">
+                                <div class="blue-team-logo-container">
+                                    <div class="team-logo" style="background-image:url(<%=game_info[i].blue_team_logo%>)"></div>
+                                </div>
+                                <div class="red-team-logo-container">
+                                    <div class="team-logo" style="background-image:url(<%=game_info[i].red_team_logo%>)"></div>
+                                </div>
+                                <span><%=game_info[i].blue_team_name%> 대 <%=game_info[i].red_team_name%></span>
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                    <i class="fa fa-trophy"></i> <%=game_info[i].won_team_name == null ? '경기전' :game_info[i].won_team_name %>
+                                </span>
+                                <small class="text-muted"> <i class="fa fa-clock-o"></i> <%=game_info[i].week%>주차 경기일정</small>
+                                <a href="/league/detail?gid=<%=game_info[i].gid%>" class="product-name">
+                                    <%=game_info[i].date.toDate()%>
+                                        <%=game_info[i].time.toTime()%>
+                                </a>
+
+                                <div class="m-t text-righ">
+                                    <a href="/league/detail?gid=<%=game_info[i].gid%>" class="btn btn-xs btn-outline btn-primary">정보보기 <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+
+                                <div class="m-t user_role_level_2">
+                                    <a href="/league/create_game?gid=<%=game_info[i].gid%>"><span class="round-modify"> <i class="fa fa-pencil-square"></i> 수정</span></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            // toggleStylesheet('/css/plugins/chosen/bootstrap-chosen.css', 1);
+            // $('head').append(' <script src = \'/js/plugins/chosen/chosen.jquery.js\'> <\/script>');
+
+            $(document).ready(function () {
+
+            });
+
+        }
+    </script>

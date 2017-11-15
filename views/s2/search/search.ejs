@@ -1,0 +1,253 @@
+<% 
+layout('/s2/layout'); 
+%>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs g-bg-gray-light-v5 g-py-50">
+        <div class="container">
+            <div class="d-sm-flex text-center">
+                <div class="align-self-center">
+                    <h1 class="h3 g-font-weight-300 w-100 g-mb-10 g-mb-0--md">검색결과</h1>
+                </div>
+
+                <div class="align-self-center ml-auto">
+                    <ul class="u-list-inline">
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/">홈</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-color-primary">
+                            <span>검색결과</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+
+    <section class="g-pt-50 g-pb-90">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-lg-3 g-pr-40--lg g-mb-50 g-mb-0--lg">
+                    <!-- Categories -->
+                    <h2 class="h5 text-uppercase g-color-gray-dark-v1">검색분류</h2>
+                    <hr class="g-brd-gray-light-v4 g-my-15">
+                    <ul class="list-unstyled g-mb-40">
+                        <li class="my-3">
+                            <a class="d-flex justify-content-between u-link-v5 g-color-gray-dark-v1 g-parent" href="#">
+                                오버로그 유저 검색 결과
+                                <span class="d-inline-block g-font-size-12 g-min-width-40 g-brd-around g-color-gray-dark-v5 g-brd-gray-light-v3 text-center rounded g-px-10 g-py-3 search-result-overlog-count">0</span>
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a class="d-flex justify-content-between u-link-v5 g-color-gray-dark-v1" href="#">
+                                리그 검색 결과
+                                <span class="d-inline-block g-font-size-12 g-min-width-40 g-brd-around g-color-gray-dark-v5 g-brd-gray-light-v3 g-bg-primary--parent-hover text-center rounded g-px-10 g-py-3 search-result-league-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- End Categories -->
+
+                </div>
+
+                <!-- Search Results -->
+                <div class="col-lg-9">
+                    <!-- Search Info -->
+                    <div class="d-md-flex justify-content-between g-mb-30">
+                        <!-- <h3 class="h6 text-uppercase g-mb-10 g-mb--lg">총
+                            <span class="g-color-gray-dark-v1">384,907</span>건의 결과</h3> -->
+                        <ul class="list-inline">
+                            <li class="list-inline-item g-mr-30">
+                                <a class="u-link-v5 g-color-gray-dark-v1 g-color-gray-dark-v5--hover" href="#">
+                                    <i class="icon-list g-pos-rel g-top-1 g-mr-5"></i> 목록보기
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" href="#">
+                                    <i class="icon-grid g-pos-rel g-top-1 g-mr-5"></i> 격자보기
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Search Info -->
+
+                    <!-- Search Result -->
+                    <article>
+                        <h3 class="h4 g-mb-15 ">
+                            <a class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover g-valign-middle">
+                                <img class="g-width-20 mr-2 g-mb-4" src="/s2/assets/img/overlog_icon.png">오버로그 검색결과</a>
+                        </h3>
+
+                        <div class="d-lg-flex justify-content-between align-items-center g-mb-15">
+                            <!-- Search Info -->
+                            <ul class="list-inline g-mb-10 g-mb-0--lg">
+                                <li class="list-inline-item g-mr-30">총
+                                    <span class="g-color-gray-dark-v1 search-result-overlog-count">
+                                    </span>건 중 5 건</h3>
+                                </li>
+                                <!-- <li class="list-inline-item g-mr-30">
+                                    <i class="icon-calendar g-pos-rel g-top-1 g-color-gray-dark-v5 g-mr-5"></i> 2 weeks ago
+                                </li>
+                                <li class="list-inline-item g-mr-30">
+                                    <i class="icon-eye g-pos-rel g-top-1 g-color-gray-dark-v5 g-mr-5"></i> 722,538
+                                </li> -->
+                            </ul>
+                            <!-- End Search Info -->
+
+                            <!-- Share, Print and More -->
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item g-mr-20">
+                                    <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" href="#">
+                                        <i class="icon-share g-pos-rel g-top-1 g-mr-5"></i> Share
+                                    </a>
+                                </li>
+                                <li class="list-inline-item g-mr-20">
+                                    <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" href="#">
+                                        <i class="icon-printer g-pos-rel g-top-1 g-mr-5"></i> Print
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <div class="dropdown g-mb-10 g-mb-0--md">
+                                        <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <i class="icon-arrow-down-circle g-pos-rel g-top-1"></i> More
+                                        </span>
+                                        <div class="dropdown-menu dropdown-menu-right rounded-0 g-mt-10">
+                                            <a class="dropdown-item g-px-10" href="#">
+                                                <i class="icon-directions g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Report
+                                            </a>
+                                            <a class="dropdown-item g-px-10" href="#">
+                                                <i class="icon-star g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Save
+                                            </a>
+                                            <a class="dropdown-item g-px-10" href="#">
+                                                <i class="icon-question g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Info
+                                            </a>
+                                            <a class="dropdown-item g-px-10" href="#">
+                                                <i class="icon-cloud-download g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Ger More Info
+                                            </a>
+
+                                            <div class="dropdown-divider"></div>
+
+                                            <a class="dropdown-item g-px-10" href="#">
+                                                <i class="icon-plus g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> View More
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- End Share, Print and More -->
+                        </div>
+
+                        <div class="row g-brd-none ">
+                            <table id='search-result-table' class="col-12 g-mb-30">
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                    </article>
+                    <!-- End Search Result -->
+
+                    <hr class="g-brd-gray-light-v4 g-my-40">
+                    <article>
+                        <h3 class="h4 g-mb-15">
+                            <img src="/img/logo/logo-team-league.png" class="g-width-45">
+                            <a class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover">리그 내 검색결과</a>
+                        </h3>
+
+                        <div class="row g-brd-none ">
+                            <table id='league-search-result-table' class="col-12 g-mb-30">
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                    </article>
+
+                    <hr class="g-brd-gray-light-v4 g-my-40">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.onload = function () {
+            $('head').append(' <script src = \'/s2/assets/js/components/hs.progress-bar.js\'> <\/script>');
+
+            // initialization of horizontal progress bars
+            // setTimeout(function () { // important in this case
+            var horizontalProgressBars = $.HSCore.components.HSProgressBar.init('.js-hr-progress-bar', {
+                direction: 'horizontal',
+                indicatorSelector: '.js-hr-progress-bar-indicator'
+            });
+            // }, 1);
+
+            $('head').append(' <script src = \'/s2/js/view/search.js\'> <\/script>');
+        }
+    </script>
+
+
+    <script id="search-result-html-template" type="text/x-handlebars-template">
+        <div class="clearfix w-100 d-table g-py-20 g-px-10">
+            <div class="d-table-cell g-width-130">
+                <img class="g-mr-15 g-width-40 g-height-40 g-brd-around g-brd-black g-bg-img-hero image-inner-shadow" src="{{user.portrait}}">
+                <div class="d-inline-block g-font-size-14 g-font-weight-700 g-valign-middle g-mr-20">
+                    <span class="d-flex">
+                        {{user.playerName}}
+                    </span>
+                    <span class="d-flex g-font-weight-500 g-font-size-12 g-color-gray-dark-v5">
+                        LV.{{user.level}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-table-cell g-width-55 g-font-size-12 g-hidden-sm-down g-font-weight-700 g-valign-middle g-mr-20">
+                <img class="d-inline-block mr2 g-width-20 image-fit-cover" src="{{user.rankIcon}}"> {{user.competitive_rank}}
+                <!-- <span class="fa fa-minus"></span> -->
+            </div>
+            <div class="d-table-cell g-font-size-14 g-font-weight-700 g-valign-middle text-center">
+                <div class="js-hr-progress-bar progress g-bg-black-opacity-0_1 rounded-0 g-mb-5 g-mx-10">
+                    <div class="js-hr-progress-bar-indicator progress-bar g-bg-cyan u-progress-bar--xs" role="progressbar" style="width: {{user.winrate}}%;"
+                        aria-valuenow="{{user.winrate}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small>
+                    {{user.winrate}}%
+                </small>
+            </div>
+            <div class="d-table-cell g-width-20 g-pl-10 g-font-size-14 g-font-weight-700 g-valign-middle text-center ">
+                <a href="http://overlog.gg{{user.link}}"><span class="fa fa-search"></span></a>
+            </div>
+
+        </div>
+    </script>
+
+
+    <script id="league-search-result-html-template" type="text/x-handlebars-template">
+        <div class="clearfix w-100 d-table g-py-20 g-px-10">
+            <div class="d-table-cell g-width-130">
+                <img class="g-mr-15 g-width-40 g-height-40 g-brd-around g-brd-black g-bg-img-hero image-inner-shadow" src="{{user.portrait}}">
+                <div class="d-inline-block g-font-size-14 g-font-weight-700 g-valign-middle g-mr-20">
+                    <span class="d-flex">
+                        {{user.playerName}}
+                    </span>
+                    <span class="d-flex g-font-weight-500 g-font-size-12 g-color-gray-dark-v5">
+                        LV.{{user.level}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-table-cell g-width-55 g-font-size-12 g-hidden-sm-down g-font-weight-700 g-valign-middle g-mr-20">
+                <img class="d-inline-block mr2 g-width-20 image-fit-cover" src="{{user.rankIcon}}"> {{user.competitive_rank}}
+                <!-- <span class="fa fa-minus"></span> -->
+            </div>
+            <div class="d-table-cell g-font-size-14 g-font-weight-700 g-valign-middle text-center">
+                <img class="d-inline-block mr2 g-width-20 image-fit-cover" src="{{user.teamLogo}}"> {{user.teamName}}
+            </div>
+            <div class="d-table-cell g-width-20 g-pl-10 g-font-size-14 g-font-weight-700 g-valign-middle text-center ">
+                <a href="{{user.link}}"><span class="fa fa-search"></span></a>
+            </div>
+
+        </div>
+    </script>

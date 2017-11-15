@@ -1,0 +1,340 @@
+<% 
+layout('/layout');
+
+String.prototype.toShortID = function () {
+    var regex = /(#|-).[0-9]+/i;
+    return this.replace(regex, "");
+}
+
+var round = round_info[rid-1];
+if( round !== undefined ){
+    var current_round_info = {
+        battle_ground:round_info[rid-1].battle_ground,
+        won_team_id:round_info[rid-1].won_team_id,
+        potg_player_id:round_info[rid-1].potg_player_id,
+        potg_link:round_info[rid-1].potg_link,
+        blue_player_1:round_info[rid-1].blue_player_1,
+        blue_player_2:round_info[rid-1].blue_player_2,
+        blue_player_3:round_info[rid-1].blue_player_3,
+        blue_player_4:round_info[rid-1].blue_player_4,
+        blue_player_5:round_info[rid-1].blue_player_5,
+        blue_player_6:round_info[rid-1].blue_player_6,
+        red_player_1:round_info[rid-1].red_player_1,
+        red_player_2:round_info[rid-1].red_player_2,
+        red_player_3:round_info[rid-1].red_player_3,
+        red_player_4:round_info[rid-1].red_player_4,
+        red_player_5:round_info[rid-1].red_player_5,
+        red_player_6:round_info[rid-1].red_player_6,
+    }
+} else {
+    var current_round_info = {
+        battle_ground:'',
+        won_team_id:'',
+        potg_player_id:'',
+        potg_link:'',
+        blue_player_1:'',
+        blue_player_2:'',
+        blue_player_3:'',
+        blue_player_4:'',
+        blue_player_5:'',
+        blue_player_6:'',
+        red_player_1:'',
+        red_player_2:'',
+        red_player_3:'',
+        red_player_4:'',
+        red_player_5:'',
+        red_player_6:'',
+    }
+}
+
+%>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>내전정보</strong></h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/league/dashboard">홈</a>
+                </li>
+                <li class="active">
+                    <strong>경기입력</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>경기입력</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal m-t-md" action="/league/round_insert" method="POST">
+
+                            <input type="text" name="gid" class="form-control hidden" placeholder="" value="<%=gid%>">
+                            <input type="text" name="rid" class="form-control hidden" placeholder="" value="<%=rid%>">
+
+                            <h3>
+                                제
+                                <%=rid%> 경기
+                            </h3>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">전장</label>
+                                <div class="col-sm-10">
+                                    <select name="battle_ground" data-placeholder="전장 선택하세요" class="chosen-select" tabindex="1">
+                                    <option value="">전장</option>
+                                    <option value="1"  <%='1' == current_round_info.battle_ground ? 'selected':''%>>아누비스</option>
+                                    <option value="2"  <%='2' == current_round_info.battle_ground ? 'selected':''%>>하나무라</option>
+                                    <option value="3"  <%='3' == current_round_info.battle_ground ? 'selected':''%>>볼스카야 인더스트리</option>
+                                    <option value="4"  <%='4' == current_round_info.battle_ground ? 'selected':''%>>감시 기지: 지브롤터</option>
+                                    <option value="5"  <%='5' == current_round_info.battle_ground ? 'selected':''%>>도라도</option>
+                                    <option value="6"  <%='6' == current_round_info.battle_ground ? 'selected':''%>>66번국도</option>
+                                    <option value="7"  <%='7' == current_round_info.battle_ground ? 'selected':''%>>리장 타워</option>
+                                    <option value="8"  <%='8' == current_round_info.battle_ground ? 'selected':''%>>일리오스</option>
+                                    <option value="9"  <%='9' == current_round_info.battle_ground ? 'selected':''%>>네팔</option>
+                                    <option value="10"  <%='10' == current_round_info.battle_ground ? 'selected':''%>>오아시스</option>
+                                    <option value="11"  <%='11' == current_round_info.battle_ground ? 'selected':''%>>왕의 길</option>
+                                    <option value="12"  <%='12' == current_round_info.battle_ground ? 'selected':''%>>눔바니</option>
+                                    <option value="13"  <%='13' == current_round_info.battle_ground ? 'selected':''%>>헐리우드</option>
+                                    <option value="14"  <%='14' == current_round_info.battle_ground ? 'selected':''%>>아이헨발데</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">승리팀</label>
+                                <div class="col-sm-10">
+                                    <select name="won_team_id" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="1" value="1">
+                                    <option value="">승리팀</option>
+                                    <option value="<%=game_info.blue_team_id%>" <%=game_info.blue_team_id == current_round_info.won_team_id ? 'selected':''%> ><%=game_info.blue_team_name%></option>
+                                    <option value="<%=game_info.red_team_id%>" <%=game_info.red_team_id == current_round_info.won_team_id ? 'selected':''%>><%=game_info.red_team_name%></option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <h3>
+                                <%=game_info.blue_team_name%> 참여인원 선택
+                            </h3>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원1</label>
+                                <div class="col-sm-10">
+                                    <select name="blue_player_1" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="1">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < blue_team_member.length;i++) {%>
+                                    <option value="<%=blue_team_member[i].id%>" <%=blue_team_member[i].id == current_round_info.blue_player_1 ? 'selected':''%>><%=blue_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원2</label>
+                                <div class="col-sm-10">
+                                    <select name="blue_player_2" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="2">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < blue_team_member.length;i++) {%>
+                                    <option value="<%=blue_team_member[i].id%>" <%=blue_team_member[i].id == current_round_info.blue_player_2 ? 'selected':''%>><%=blue_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원3</label>
+                                <div class="col-sm-10">
+                                    <select name="blue_player_3" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="3">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < blue_team_member.length;i++) {%>
+                                    <option value="<%=blue_team_member[i].id%>" <%=blue_team_member[i].id == current_round_info.blue_player_3 ? 'selected':''%>><%=blue_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원4</label>
+                                <div class="col-sm-10">
+                                    <select name="blue_player_4" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="4">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < blue_team_member.length;i++) {%>
+                                    <option value="<%=blue_team_member[i].id%>" <%=blue_team_member[i].id == current_round_info.blue_player_4 ? 'selected':''%>><%=blue_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원5</label>
+                                <div class="col-sm-10">
+                                    <select name="blue_player_5" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="5">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < blue_team_member.length;i++) {%>
+                                    <option value="<%=blue_team_member[i].id%>" <%=blue_team_member[i].id == current_round_info.blue_player_5 ? 'selected':''%>><%=blue_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원6</label>
+                                <div class="col-sm-10">
+                                    <select name="blue_player_6" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="6">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < blue_team_member.length;i++) {%>
+                                    <option value="<%=blue_team_member[i].id%>" <%=blue_team_member[i].id == current_round_info.blue_player_6 ? 'selected':''%>><%=blue_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <h3>
+                                <%=game_info.red_team_name%> 참여인원 선택
+                            </h3>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원1</label>
+                                <div class="col-sm-10">
+                                    <select name="red_player_1" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="1">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < red_team_member.length;i++) {%>
+                                    <option value="<%=red_team_member[i].id%>" <%=red_team_member[i].id == current_round_info.red_player_1 ? 'selected':''%>><%=red_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원2</label>
+                                <div class="col-sm-10">
+                                    <select name="red_player_2" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="2">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < red_team_member.length;i++) {%>
+                                    <option value="<%=red_team_member[i].id%>" <%=red_team_member[i].id == current_round_info.red_player_2 ? 'selected':''%>><%=red_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원3</label>
+                                <div class="col-sm-10">
+                                    <select name="red_player_3" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="3">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < red_team_member.length;i++) {%>
+                                    <option value="<%=red_team_member[i].id%>" <%=red_team_member[i].id == current_round_info.red_player_3 ? 'selected':''%>><%=red_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원4</label>
+                                <div class="col-sm-10">
+                                    <select name="red_player_4" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="4">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < red_team_member.length;i++) {%>
+                                    <option value="<%=red_team_member[i].id%>" <%=red_team_member[i].id == current_round_info.red_player_4 ? 'selected':''%>><%=red_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원5</label>
+                                <div class="col-sm-10">
+                                    <select name="red_player_5" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="5">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < red_team_member.length;i++) {%>
+                                    <option value="<%=red_team_member[i].id%>" <%=red_team_member[i].id == current_round_info.red_player_5 ? 'selected':''%>><%=red_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">참여인원6</label>
+                                <div class="col-sm-10">
+                                    <select name="red_player_6" data-placeholder="참여인원을 선택하세요" class="chosen-select" tabindex="6">
+                                    <option value="">참여인원</option>
+                                    <% for(var i = 0; i < red_team_member.length;i++) {%>
+                                    <option value="<%=red_team_member[i].id%>" <%=red_team_member[i].id == current_round_info.red_player_6 ? 'selected':''%>><%=red_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <h3>
+                                최고의 플레이어
+                            </h3>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">최고의 플레이어</label>
+                                <div class="col-sm-10">
+                                    <select name="potg_player_id" data-placeholder="최고의 플레이어" class="chosen-select" tabindex="6">
+                                    <option value="">최고의 플레이어</option>
+                                    <% for(var i = 0; i < blue_team_member.length;i++) {%>
+                                    <option value="<%=blue_team_member[i].id%>" <%=blue_team_member[i].id == current_round_info.potg_player_id ? 'selected':''%>><%=blue_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                    <% for(var i = 0; i < red_team_member.length;i++) {%>
+                                    <option value="<%=red_team_member[i].id%>" <%=red_team_member[i].id == current_round_info.potg_player_id ? 'selected':''%>><%=red_team_member[i].id.toShortID()%></option>
+                                    <% } %>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">클립주소</label>
+                                <div class="col-sm-10">
+                                    <input name="potg_link" type="text" class="form-control" placeholder="" value="<%=current_round_info.potg_link%>">
+                                </div>
+                            </div>
+
+
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="row">
+                                <div class="form-group m-b-lg">
+                                    <div class="col-xs-5 col-xs-offset-1">
+                                        <a href="javascript:history.go(-1)" class="btn btn-block btn-white">취소</a>
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <button class="btn btn-block btn-primary" type="submit">저장</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            toggleStylesheet('/css/plugins/chosen/bootstrap-chosen.css', 1);
+            $('head').append(' <script src = \'/js/plugins/chosen/chosen.jquery.js\'> <\/script>');
+
+            $(document).ready(function () {
+
+                $('.chosen-select').chosen({
+                    width: "100%"
+                });
+            });
+        }
+    </script>

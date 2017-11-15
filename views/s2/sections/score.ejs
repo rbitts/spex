@@ -1,0 +1,88 @@
+<%
+var teamArray = pdata.teams !== undefined ? pdata.teams : [];
+var first = teamArray[0];
+%>
+    <!-- Section Content -->
+    <section class="g-pt-0 g-bg-secondary">
+        <div id="score" class="text-center g-color-gray-dark-v1 g-py-100">
+            <div class="container">
+                <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-45">
+                    <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">경기순위</h4>
+                    <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">리그순위</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="row flex-lg-row align-items-center justify-content-lg-start">
+                            <div class="col-12">
+                                <h3 class="text-uppercase g-font-size-11 g-theme-color-gray-light-v2 mb-30">리그 선두</h3>
+                                <div class="u-arrow-v1 g-absolute-centered--x g-font-size-50 g-height-100 g-width-100 g-rounded-50x g-bg-primary g-color-white icon-badge">
+                                </div>
+                                <h3 class="g-mt-120">
+                                    <%= first.info.name %>
+                                </h3>
+                            </div>
+                            <!-- <div class="col-6">
+                                <h3 class="text-uppercase g-font-size-11 g-theme-color-gray-light-v2 mb-0">경기기록</h3>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="g-brd-bottom g-brd-white-opacity-0_2 g-py-8 g-font-size-11">팀란포vs효도</li>
+                                    <li class="g-brd-bottom g-brd-white-opacity-0_2 g-py-8 g-font-size-11">팀란포vs효도</li>
+                                    <li class="g-brd-bottom g-brd-white-opacity-0_2 g-py-8 g-font-size-11">팀란포vs효도</li>
+                                    <li class="g-brd-bottom g-brd-white-opacity-0_2 g-py-8 g-font-size-11">팀란포vs효도</li>
+                                    <li class="g-brd-bottom g-brd-white-opacity-0_2 g-py-8 g-font-size-11">팀란포vs효도</li>
+                                </ul>
+                                <h3 class="text-uppercase g-font-size-11 g-theme-color-gray-light-v2 mb-0">7승0패</h3>
+                            </div> -->
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 g-mt-10">
+                        <div class="table-responsive g-brd-around g-brd-gray-light-v5 g-brd-around-none--lg">
+                            <table class="table u-table--v2 text-center text-uppercase mb-0">
+                                <thead class="g-bg-primary">
+                                    <tr class="g-letter-spacing-1 g-font-weight-700 g-font-size-12 g-color-white g-col-border-top-0">
+                                        <th></th>
+                                        <th>팀명</th>
+                                        <th>승</th>
+                                        <th>패</th>
+                                        <th>승차</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="g-letter-spacing-1 g-font-weight-700 g-font-size-12 g-color-black g-bg-white">
+                                    <%
+                                    teamArray.forEach(function(item,index){
+                                    %>
+                                        <tr>
+                                            <th scope="row">
+                                                <%=item.info.score.rank%>위
+                                            </th>
+                                            <td class="text-left">
+                                                <img class="d-inline-block g-mr-25 g-width-40" src="<%= item.info.logo %>" alt="<%=item.info.name%>">
+                                                <%=item.info.name%>
+                                            </td>
+                                            <td>
+                                                <%=item.info.score.won%>
+                                            </td>
+                                            <td>
+                                                <%=item.info.score.lost%>
+                                            </td>
+                                            <td>
+                                                <% if((item.info.score.won - first.info.score.won)){ %>
+                                                    <%= (item.info.score.won - first.info.score.won) %>
+                                                        <% }else{ %>
+                                                            <i class="fa fa-minus"></i>
+                                                            <% }%>
+                                            </td>
+                                        </tr>
+                                        <%})%>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Section Content -->

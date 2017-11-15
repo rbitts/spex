@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>삼성전자 오버워치 리그</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!--<link href="/css/plugins/dataTables/datatables.min.css" rel="stylesheet">-->
+
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/spex.css" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Mainly scripts -->
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+
+    <!-- Number -->
+    <script src="/js/plugins/jqNumber/jquery.number.min.js"></script>
+
+    <!-- image loader -->
+    <!--<script src="/js/plugins/imageloader/jquery.imageloader.js"></script>-->
+
+    <script src="/js/app.sign.out.js"></script>
+    <!-- <script src="/js/api/app.session.js"></script> -->
+
+    <!-- dataTables -->
+    <!--<script src="/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="/js/dataTables.js"></script>-->
+
+    <!-- fastClick -->
+    <script src="/js/plugins/fastclick/fastclick.min.js"></script>
+    <script>
+        var attachFastClick = Origami.fastclick;
+        attachFastClick(document.body);
+    </script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/js/inspinia.js"></script>
+    <script src="/js/plugins/pace/pace.min.js"></script>
+
+</head>
+
+<body class="canvas-menu">
+
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <a class="close-canvas-menu"><i class="fa fa-times"></i></a>
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <img src="/img/logo/logo.png" class="user-layout-logo session-user-info-avatar">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold text-white" id="session-user-id"></strong></span></span>
+                            <a data-toggle="dropdown" class="dropdown-toggle  session-team-info" href="#">
+                                <span class="text-muted text-xs block">팀정보 <b class="caret"></b></span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs session-team-info">
+                                <li class="signout"><a>Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            <img src="/img/logo/logo.png" class="img-logo user-layout-logo session-user-info-avatar">
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/league/dashboard" class="session-navigation"><i class="fa fa-trophy"></i> <span class="nav-label">리그</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="/league/team" class="session-navigation"><i class="fa fa-users"></i> 팀정보</a></li>
+                            <li><a href="/league/scream" class="session-navigation"><i class="fa fa-bullseye"></i> 경기기록</a></li>
+                            <li class="user_role_level_2"><a href="/league/create_game" class="session-navigation"><i class="fa fa-edit"></i> 경기생성</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li>
+                        <a href="#" class="session-navigation"><i class="fa fa-th-large"></i> <span class="nav-label">전적조회</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/users" class="session-navigation"> <i class="fa fa-user-circle"></i> 회원전적조회</a>
+                            </li>
+                            <li>
+                                <a href="#" class="session-navigation"> <i class="fa fa-star"></i> 즐겨찾기조회</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!--<li class="user_role_level_1">
+                        <a href="#" class="session-navigation"><i class="fa fa-edit"></i> <span class="nav-label">설문</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="/poll" class="session-navigation">설문조사</a></li>
+                            <li><a href="/poll/poll_result" class="session-navigation">설문결과</a></li>
+                        </ul>
+                    </li>-->
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" method="post" action="#">
+                            <div class="form-group">
+                                <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right pull-right">
+                        <li class="user_role_level_1">
+                            <a id="my-info-link">
+                                <i class="fa fa-user-circle-o"></i> 내정보
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="signout">
+                                <i class="fa fa-sign-out"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+            <%- body %>
+                <div class="footer">
+                    <div>
+                        <strong>Copyright</strong> rbitts@gmail.com &copy; 2017
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

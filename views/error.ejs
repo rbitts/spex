@@ -1,0 +1,16 @@
+<% layout('layout') %>
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>
+            <%= error.status %>
+        </h1>
+        <h3 class="font-bold">Internal Server Error</h3>
+
+        <div class="error-desc">
+            <p>
+                <%= message %>
+            </p>
+            <pre><%= error.stack %></pre>
+            <p> You can go back to main page:</p> <br/><a href="/" class="btn btn-primary m-t">Dashboard</a>
+        </div>
+    </div>

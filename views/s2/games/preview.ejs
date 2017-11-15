@@ -1,0 +1,538 @@
+<% 
+layout('/s2/layout'); 
+%>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs g-bg-gray-light-v5 g-py-50">
+        <div class="container">
+            <div class="d-sm-flex text-center">
+                <div class="align-self-center">
+                    <h1 class="h3 g-font-weight-300 w-100 g-mb-10 g-mb-0--md">경기정보</h1>
+                </div>
+
+                <div class="align-self-center ml-auto">
+                    <ul class="u-list-inline">
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/">홈</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-mr-5">
+                            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/s2/games">경기</a>
+                            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+                        </li>
+                        <li class="list-inline-item g-color-primary">
+                            <span>상세정보</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+
+    <section id="home" class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-black-opacity-0_7--after g-pt-150" style="background-image: url(/s2/assets/img/league_large_poster.jpg);">
+        <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-pb-65">
+
+
+            <div class="row g-mb-30">
+                <div class="col-md-6">
+                    <div class="media g-mb-30">
+                        <div class="media-left d-flex g-pos-rel g-mr-20 hidden-md-up">
+                            <img class="g-height-120 g-brd-around g-brd-black g-brd-1 image-inner-shadow" src="<%=info.game_info.blue_team.info.info.logo%>">
+                        </div>
+
+                        <div class="media-body text-uppercase text-md-right">
+                            <h2 class="text-uppercase h2 g-font-weight-700 g-font-size-40 g-font-size-60--md g-color-white">
+                                <%=info.game_info.blue_team.info.info.name%>
+                            </h2>
+                            <span>
+                                <i class="fa fa-trophy mr-2"></i>현재 리그 순위
+                                <%=info.game_info.blue_team.rank.rank%>위</span>
+                            <ul class="list-unstyled">
+                                <li class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mb-5">최근경기</li>
+                                <% 
+                                info.game_info.blue_team.history.forEach(h=>{
+                                    var className = h.won ? 'g-bg-blue': 'g-bg-red';
+                                    var historyText = h.won ? '승': '패';
+                                %>
+                                    <li class="d-block g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 g-mb-5">
+                                        <span class="g-font-size-12">vs</span>
+                                        <img class="d-inline-block g-brd-around g-brd-black image-inner-shadow g-mx-5 g-width-30" src="<%= h.versus.logo %>" alt="<%= h.versus.name %>">
+                                        <span class="g-font-size-12 mr-2">
+                                            <%= h.versus.name %>
+                                        </span>
+
+                                        <span class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 <%= className %>">
+                                            <%= historyText %>
+                                        </span>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                        </div>
+                        <div class="media-right d-flex g-pos-rel g-ml-20 hidden-sm-down">
+                            <img class="g-height-120 g-brd-around g-brd-black g-brd-1 image-inner-shadow" src="<%=info.game_info.blue_team.info.info.logo%>">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="media g-mb-30">
+                        <div class="media-left d-flex g-pos-rel g-mr-20">
+                            <img class="g-height-120 g-brd-around g-brd-black g-brd-1 image-inner-shadow" src="<%=info.game_info.red_team.info.info.logo%>">
+                        </div>
+
+                        <div class="media-body text-uppercase">
+                            <h2 class="text-uppercase h2 g-font-weight-700 g-font-size-40 g-font-size-60--md g-color-white">
+                                <%=info.game_info.red_team.info.info.name%>
+                            </h2>
+                            <span>
+                                <i class="fa fa-trophy mr-2"></i>현재 리그 순위
+                                <%=info.game_info.red_team.rank.rank%>위</span>
+                            <ul class="list-unstyled">
+                                <li class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5">최근경기</li>
+                                <% 
+                                    info.game_info.red_team.history.forEach(h=>{
+                                        var className = h.won ? 'g-bg-blue': 'g-bg-red';
+                                        var historyText = h.won ? '승': '패';
+                                    %>
+                                    <li class="d-block g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 g-mb-5">
+                                        <span class="g-font-size-12">vs</span>
+                                        <img class="d-inline-block g-brd-around g-brd-black image-inner-shadow g-mx-5 g-width-30" src="<%= h.versus.logo %>" alt="<%= h.versus.name %>">
+                                        <span class="g-font-size-12 mr-2">
+                                            <%= h.versus.name %>
+                                        </span>
+
+                                        <span class="d-inline-flex g-font-size-9 g-font-weight-700 g-color-white g-px-5 g-rounded-3 g-mr-5 <%= className %>">
+                                            <%= historyText %>
+                                        </span>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h2 class="text-center text-uppercase h2 g-font-weight-700 g-font-size-20 g-font-size-30--md g-color-white g-mb-30">
+                경기까지
+            </h2>
+
+            <!-- Countdown v4 -->
+            <div class="js-countdown text-center text-uppercase u-countdown-v4 g-mb-40 g-mb-70--md" data-end-date="<%= info.dateString %>"
+                data-month-format="%m" data-days-format="%D" data-hours-format="%H" data-minutes-format="%M" data-seconds-format="%S">
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-days g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">12</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">일</span>
+                </div>
+
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-hours g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">01</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">시간</span>
+                </div>
+
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-minutes g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">52</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">분</span>
+                </div>
+
+                <div class="d-inline-block g-bg-white-opacity-0_05 g-brd-around g-brd-white-opacity-0_3 g-pa-15-20-10 g-mx-0 g-mx-20--md g-mb-30">
+                    <div class="js-cd-seconds g-line-height-1 g-font-size-32 g-font-size-60--md g-font-weight-700 g-mb-2">52</div>
+                    <span class="text-uppercase g-color-white-opacity-0_7 g-font-size-12">초</span>
+                </div>
+
+            </div>
+            <!-- End Countdown v4 -->
+
+            <div class="row g-mx-minus-5">
+                <div class="col-md-4 g-px-5 g-mb-20 g-mb-0--md">
+                    <div class="media">
+                        <div class="media-left d-flex align-self-center g-mr-20">
+                            <i class="fa fa-calendar g-font-size-27 g-color-white-opacity-0_5"></i>
+                        </div>
+
+                        <div class="media-body text-uppercase">
+                            <p class="g-mb-5">
+                                <strong class="g-font-size-14 g-color-white-opacity-0_5">경기일시</strong>
+                            </p>
+                            <h3 class="h3 text-uppercase g-font-size-15 g-color-white mb-0">2017년 6월 25일 저녁 10시</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 g-px-5 g-mb-20 g-mb-0--md">
+                    <div class="media">
+                        <div class="media-left d-flex align-self-center g-mr-20">
+                            <i class="fa fa-youtube g-font-size-27 g-color-white-opacity-0_5"></i>
+                        </div>
+
+                        <div class="media-body text-uppercase">
+                            <p class="g-mb-5">
+                                <strong class="g-font-size-14 g-color-white-opacity-0_5">중계채널</strong>
+                            </p>
+                            <h3 class="h3 text-uppercase g-font-size-15 g-color-white mb-0">삼팩스 공식중계 채널</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="g-mt-50 g-mb-50">
+
+        <div class="container">
+            <div class="text-uppercase text-center u-heading-v2-4--bottom g-brd-primary g-mb-60">
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-15">엔트리정보</h4>
+                <h2 class="u-heading-v2__title g-line-height-1_1 g-font-weight-700 g-font-size-40 g-color-black g-mb-minus-10">경기전</h2>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Profle Content -->
+                <div class="col-lg-12">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20" role="tablist"
+                        data-target="nav-1-1-default-hor-left-underline" data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
+                        <li class="nav-item">
+                            <a class="nav-link g-py-10 active" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--1" role="tab">
+                                <%= info.game_info.red_team.info.info.name %> 엔트리</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2" role="tab">
+                                <%= info.game_info.blue_team.info.info.name %> 엔트리</a>
+                        </li>
+                    </ul>
+                    <!-- End Nav tabs -->
+
+                    <!-- Tab panes -->
+                    <div id="nav-1-1-default-hor-left-underline" class="tab-content">
+                        <!-- Entry 1 -->
+                        <div class="tab-pane fade show active" id="nav-1-1-default-hor-left-underline--1" role="tabpanel">
+                            <h2 class="h4 g-font-weight-600">
+                                <%= info.game_info.red_team.info.info.name %> 엔트리 정보.</h2>
+                            <p>참여 엔트리를 확인해 보세요.</p>
+
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="g-px-40--lg g-py-70">
+                                        <!-- Product Info -->
+                                        <div class="g-mb-30">
+
+                                            <!-- modify -->
+                                            <div class="row g-pt-10 g-pos-rel spex-level-2 spex-level-3 g-show-check options" data-spex-game="<%= info.game_id %>" data-spex-team="<%= info.game_info.red_team.id %>">
+                                                <div class=" g-pos-abs g-top-0 g-right-10 dropdown g-mb-0--md">
+                                                    <!-- options -->
+                                                    <div class="g-brd-around g-brd-2 options-button g-brd-gray-dark-v4 g-brd-primary--hover g-pos-abs g-top-0 g-right-20 dropdown g-mb-0--md">
+                                                        <span class="d-block g-color-primary--hover g-cursor-pointer g-pa-5-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fa fa-angle-down g-pos-rel g-top-1"></i>
+                                                        </span>
+                                                        <div class="dropdown-menu dropdown-menu-right rounded-0 g-mt-10">
+                                                            <a class="dropdown-item g-px-10 modify-entry">
+                                                                <i class="icon-note g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> 엔트리수정</a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End options -->
+
+                                                </div>
+                                            </div>
+                                            <!-- End of modify -->
+
+                                            <h1 class="g-font-weight-300 mb-4">
+                                                <%= info.game_info.red_team.info.info.name %>
+                                                    <br>엔트리요약</h1>
+                                        </div>
+                                        <!-- End Product Info -->
+
+                                        <!-- Price -->
+                                        <div class="g-mb-30">
+                                            <h2 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-12 text-uppercase mb-2">평점평균</h2>
+                                            <img class="g-width-35 align-bottom" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-5.png">
+                                            <span class="g-color-black g-font-weight-600 g-font-size-30 mr-2">
+                                                <%= info.game_info.red_team.summary.max_score %>
+                                            </span>
+                                            <span class="g-color-gray-dark-v4 g-font-weight-500 g-font-size-16">
+                                                <%= info.game_info.red_team.summary.score %>
+                                            </span>
+                                        </div>
+                                        <!-- End Price -->
+
+                                        <!-- Accordion -->
+                                        <div id="accordion-01" role="tablist" aria-multiselectable="true">
+                                            <div id="accordion-01-heading-01" class="g-brd-y g-brd-gray-light-v3 py-3" role="tab">
+                                                <h5 class="g-font-weight-400 g-font-size-default mb-0">
+                                                    <a class="d-block g-color-gray-dark-v5 g-text-underline--none--hover" href="#accordion-01-body-01" data-toggle="collapse"
+                                                        data-parent="#accordion-01" aria-expanded="false" aria-controls="accordion-01-body-01">티어정보
+                                                        <span class="float-right g-pos-rel g-top-3 mr-1 fa fa-angle-down"></span>
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="accordion-01-body-01" class="collapse" role="tabpanel" aria-labelledby="accordion-01-heading-01">
+                                                <div class="g-py-10">
+                                                    <!-- Shipping Mehtod -->
+                                                    <table class="g-width-100x text-center g-mt-20">
+                                                        <thead class="h6 g-brd-bottom g-brd-gray-light-v3 g-color-gray-dark-v3 g-font-size-13">
+                                                            <tr>
+                                                                <th class="g-width-200 g-font-weight-500 g-pa-0 g-pb-10">평점</th>
+                                                                <th class="g-font-weight-500 text-right g-pa-0 g-pb-10">인원수</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% for(var i = 7 ; i> 0 ;i--) {%>
+                                                                <tr class="g-color-gray-dark-v4 g-font-size-12">
+                                                                    <td class="align-top g-py-10">
+                                                                        <img class="g-width-28" src="<%= '/img/icons/rank-{0}.png'.format(i) %>">
+                                                                    </td>
+                                                                    <td class="align-top text-right g-py-10">1명</td>
+                                                                </tr>
+                                                                <% } %>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Accordion -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+
+                                    <div class="row">
+
+                                        <% info.game_info.red_team.entry.forEach(function (m,i) {
+                                               var activeClass = ( !m.accept ) ? '' : 'activated';
+                                               var portrait = (m.detail.account.player.mostplay !== undefined && (m.detail.account.player.mostplay) ) ? '/img/vertical-portrait/{0}.png'.format(m.detail.account.player.mostplay) : '/s2/assets/img/120x120/img6.png';
+                                            %>
+                                            <div class="col-4 col-sm-4 col-lg-3 g-mb-50 g-mb-30--lg">
+                                                <!-- Figure -->
+                                                <figure class="text-center">
+                                                    <!-- Figure Image -->
+                                                    <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                        <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero <%= activeClass %>" style="background-image:url(<%= portrait %>);">
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Figure Image -->
+                                                    <!-- Figure Info -->
+                                                    <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">
+                                                        <%= m.member.toShortID() %>
+                                                    </h4>
+                                                    <p class="text-uppercase g-font-size-12">
+                                                        <% if( m.detail.account.player.position.defense ) { %>
+                                                            <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#tank"></use>
+                                                            </svg>
+                                                            <% } if( m.detail.account.player.position.offense ) { %>
+                                                                <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                    <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#offense"></use>
+                                                                </svg>
+                                                                <% } if( m.detail.account.player.position.support ) { %>
+                                                                    <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                        <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#support"></use>
+                                                                    </svg>
+                                                                    <% } %>
+                                                                        <a href="<%= m.detail.account.player.overlog_link %>" target="__blank">
+                                                                            <img class="g-width-24 image-inner-shadow <%= (m.detail.account.player.overlog_link) ? '' : 'g-grayscale-100x' %>" src="/s2/assets/img/overlog_icon.png">
+                                                                        </a>
+                                                    </p>
+
+                                                    <!-- End Info -->
+
+                                                    <!-- Figure Body -->
+                                                    <div class="d-inline-block">
+                                                        <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                            <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                                <img class="g-width-28" src="<%= '/img/icons/rank-{0}.png'.format(m.detail.competitive.tier)%>">
+                                                            </span>
+                                                            <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">
+                                                                <%= m.detail.competitive.max_score %>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Figure Body -->
+                                                </figure>
+                                                <!-- End Figure -->
+                                            </div>
+
+
+                                            <% }) %>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- End Entry 1 -->
+
+
+                        <!-- Entry 2 -->
+                        <div class="tab-pane fade show" id="nav-1-1-default-hor-left-underline--2" role="tabpanel">
+                            <h2 class="h4 g-font-weight-600">
+                                <%= info.game_info.blue_team.info.info.name %> 엔트리 정보.</h2>
+                            <p>참여 엔트리를 확인해 보세요.</p>
+
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="g-px-40--lg g-py-70">
+                                        <!-- Product Info -->
+                                        <div class="g-mb-30">
+                                            <!-- modify -->
+                                            <div class="row g-pt-10 g-pos-rel spex-level-2 spex-level-3 g-show-check options" data-spex-game="<%= info.game_id %>" data-spex-team="<%= info.game_info.blue_team.id %>">
+                                                <div class=" g-pos-abs g-top-0 g-right-10 dropdown g-mb-0--md">
+                                                    <!-- options -->
+                                                    <div class="g-brd-around g-brd-2 options-button g-brd-gray-dark-v4 g-brd-primary--hover g-pos-abs g-top-0 g-right-20 dropdown g-mb-0--md">
+                                                        <span class="d-block g-color-primary--hover g-cursor-pointer g-pa-5-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fa fa-angle-down g-pos-rel g-top-1"></i>
+                                                        </span>
+                                                        <div class="dropdown-menu dropdown-menu-right rounded-0 g-mt-10">
+                                                            <a class="dropdown-item g-px-10 modify-entry">
+                                                                <i class="icon-note g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> 엔트리수정</a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End options -->
+                                                </div>
+                                            </div>
+                                            <!-- End of modify -->
+
+                                            <h1 class="g-font-weight-300 mb-4">
+                                                <%= info.game_info.blue_team.info.info.name %>
+                                                    <br>엔트리요약</h1>
+                                        </div>
+                                        <!-- End Product Info -->
+
+                                        <!-- Price -->
+                                        <div class="g-mb-30">
+                                            <h2 class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-12 text-uppercase mb-2">평점평균</h2>
+                                            <img class="g-width-35 align-bottom" src="https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-5.png">
+                                            <span class="g-color-black g-font-weight-600 g-font-size-30 mr-2">
+                                                <%= info.game_info.blue_team.summary.max_score %>
+                                            </span>
+                                            <span class="g-color-gray-dark-v4 g-font-weight-500 g-font-size-16">
+                                                <%= info.game_info.blue_team.summary.score %>
+                                            </span>
+                                        </div>
+                                        <!-- End Price -->
+
+                                        <!-- Accordion -->
+                                        <div id="accordion-02" role="tablist" aria-multiselectable="true">
+                                            <div id="accordion-01-heading-02" class="g-brd-y g-brd-gray-light-v3 py-3" role="tab">
+                                                <h5 class="g-font-weight-400 g-font-size-default mb-0">
+                                                    <a class="d-block g-color-gray-dark-v5 g-text-underline--none--hover" href="#accordion-01-body-02" data-toggle="collapse"
+                                                        data-parent="#accordion-02" aria-expanded="false" aria-controls="accordion-01-body-02">티어정보
+                                                        <span class="float-right g-pos-rel g-top-3 mr-1 fa fa-angle-down"></span>
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="accordion-01-body-02" class="collapse" role="tabpanel" aria-labelledby="accordion-01-heading-01">
+                                                <div class="g-py-10">
+                                                    <!-- Shipping Mehtod -->
+                                                    <table class="g-width-100x text-center g-mt-20">
+                                                        <thead class="h6 g-brd-bottom g-brd-gray-light-v3 g-color-gray-dark-v3 g-font-size-13">
+                                                            <tr>
+                                                                <th class="g-width-200 g-font-weight-500 g-pa-0 g-pb-10">평점</th>
+                                                                <th class="g-font-weight-500 text-right g-pa-0 g-pb-10">인원수</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% for(var i = 7 ; i> 0 ;i--) {%>
+                                                                <tr class="g-color-gray-dark-v4 g-font-size-12">
+                                                                    <td class="align-top g-py-10">
+                                                                        <img class="g-width-28" src="<%= '/img/icons/rank-{0}.png'.format(i) %>">
+                                                                    </td>
+                                                                    <td class="align-top text-right g-py-10">1명</td>
+                                                                </tr>
+                                                                <% } %>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Accordion -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+
+                                    <div class="row">
+
+                                        <% info.game_info.blue_team.entry.forEach(function (m,i) {
+                                            var activeClass = ( !m.accept ) ? '' : 'activated';
+                                                   var portrait = (m.detail.account.player.mostplay !== undefined && (m.detail.account.player.mostplay) ) ? '/img/vertical-portrait/{0}.png'.format(m.detail.account.player.mostplay) : '/s2/assets/img/120x120/img6.png';
+                                                %>
+                                            <div class="col-4 col-sm-4 col-lg-3 g-mb-50 g-mb-30--lg">
+                                                <!-- Figure -->
+                                                <figure class="text-center">
+                                                    <!-- Figure Image -->
+                                                    <div class="mx-auto g-width-80 g-height-80 g-brd-around g-brd-5 g-brd-white rounded-circle g-mb-15">
+                                                        <div class="g-width-70 g-height-70 rounded-circle g-color-white g-bg-img-hero <%= activeClass %>" style="background-image:url(<%= portrait %>);">
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Figure Image -->
+                                                    <!-- Figure Info -->
+                                                    <h4 class="h6 text-uppercase g-color-black g-font-weight-700 g-mb-5">
+                                                        <%= m.member.toShortID() %>
+                                                    </h4>
+                                                    <p class="text-uppercase g-font-size-12">
+                                                        <% if( m.detail.account.player.position.defense ) { %>
+                                                            <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#tank"></use>
+                                                            </svg>
+                                                            <% } if( m.detail.account.player.position.offense ) { %>
+                                                                <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                    <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#offense"></use>
+                                                                </svg>
+                                                                <% } if( m.detail.account.player.position.support ) { %>
+                                                                    <svg viewbox="0 0 32 32" class="icon align-middle mr-2 mb-1">
+                                                                        <use xlink:href="/s2/assets/xml/hero-types-sprite.svg#support"></use>
+                                                                    </svg>
+                                                                    <% } %>
+                                                                        <a href="<%= m.detail.account.player.overlog_link %>" target="__blank">
+                                                                            <img class="g-width-24 image-inner-shadow <%= (m.detail.account.player.overlog_link) ? '' : 'g-grayscale-100x' %>" src="/s2/assets/img/overlog_icon.png">
+                                                                        </a>
+
+                                                    </p>
+
+                                                    <!-- End Info -->
+
+                                                    <!-- Figure Body -->
+                                                    <div class="d-inline-block">
+                                                        <div class="d-flex justify-content-between w-100 g-max-width-145 g-bg-gray g-color-white g-font-size-10 g-font-weight-700 text-uppercase">
+                                                            <span class="u-ns-bg-v7-right g-bg-gray-light-v4 g-px-5 g-py-4">
+                                                                <img class="g-width-28" src="<%= '/img/icons/rank-{0}.png'.format(m.detail.competitive.tier)%>">
+                                                            </span>
+                                                            <span class="g-bg-primary g-color-white g-font-weight-700 g-font-size-13 g-py-7 g-px-6 g-px-15--md">
+                                                                <%= m.detail.competitive.max_score %>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Figure Body -->
+                                                </figure>
+                                                <!-- End Figure -->
+                                            </div>
+
+
+                                            <% }) %>
+
+                                    </div>
+                                </div>
+                                <!-- End Entry 2 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        window.onload = function () {
+            $('head').append(' <script src = \'/s2/js/view/preview.js\'> <\/script>');
+        }
+    </script>

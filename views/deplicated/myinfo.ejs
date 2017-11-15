@@ -1,0 +1,143 @@
+<% 
+layout('/layout') 
+%>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>리그</strong></h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/league/dashboard">홈</a>
+                </li>
+                <li class="active">
+                    <a href="#">내정보</a>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <section class="row" my-info-config="my-info-config">
+        <div class="col-lg-12 my-avatar-bg">
+            <% if(user.hero) { %>
+                <img class="my-poster-image" src="/img/poster/<%=user.hero%>.jpg">
+                <%} else {%>
+                    <img class="my-poster-image">
+                    <%}%>
+                        <img class="my-avatar-image img-circle circle-border" src="<%=user.avatar%>">
+        </div>
+        <div class="my-info-content">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <h5>정보변경</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t-md" style="margin:0 15px;" action="/myinfo" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-xs-4 control-label">대표케릭터</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control m-b hero-select" name="hero">
+                                    <option value="ana">아나</option>
+                                    <option value="bastion">바스티온</option>
+                                    <option value="dva">디바</option>
+                                    <option value="genji">겐지</option>
+                                    <option value="hanzo">한조</option>
+                                    <option value="junkrat">정크렛</option>
+                                    <option value="lucio">루시우</option>
+                                    <option value="mccree">맥크리</option>
+                                    <option value="mei">메이</option>
+                                    <option value="mercy">메르시</option>
+                                    <option value="orisa">오리사</option>
+                                    <option value="pharah">파라</option>
+                                    <option value="reaper">리퍼</option>
+                                    <option value="reinhardt">라인하르트</option>
+                                    <option value="roadhog">로드호그</option>
+                                    <option value="soldier76">솔져:76</option>
+                                    <option value="sombra">솜브라</option>
+                                    <option value="symmetra">시메트라</option>
+                                    <option value="torbjorn">토르비욘</option>
+                                    <option value="tracer">트레이서</option>
+                                    <option value="widowmaker">위도우메이커</option>
+                                    <option value="winston">윈스턴</option>
+                                    <option value="zarya">자리야</option>
+                                    <option value="zenyatta">젠야타</option>
+                                </select>
+
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <label class="col-xs-4 control-label">아이디변경</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control hidden" value="<%=user.id.toRequestID()%>" name='original_user_id'>
+                                    <div class="input-group"><input type="text" class="form-control" placeholder="<%=user.id.toDisplayID()%>" name='change_user_id'>
+                                        <span class="input-group-btn"> <button type="button" class="btn btn-primary">조회</button> </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="row">
+                                <label class="col-xs-4 control-label">팀정보</label>
+                                <div class="col-xs-4">
+                                    <input type="text" disabled="" placeholder="<%=user.teamname%>" class="form-control">
+                                </div>
+                                <div class="col-xs-4">
+                                    <button type="button" class="btn btn-block btn-outline btn-primary"><i class="fa fa-sign-out"></i>  팀탈퇴</button>
+                                </div>
+                            </div>
+
+                            <div class="user_role_level_2">                            
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="row">
+
+                                <label class="col-xs-4 control-label">팀로고</label>
+                                <div class="col-xs-8">
+                                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                        <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span></div>
+                                        <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">파일선택</span><span class="fileinput-exists">수정</span><input type="file" name="file"></span>
+                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">제거</a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>                            
+                            
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <a href="javascript:history.go(-1)" class="btn btn-block btn-white" type="submit">취소</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-block btn-primary" type="submit">저장</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.onload = function () {
+            $('head').append(' <script src = \'/js/app/app.myinfo.js\'> <\/script>');
+            $('head').append(' <script src = \'/js/plugins/jasny/jasny-bootstrap.min.js\'> <\/script>');            
+            toggleStylesheet('/css/plugins/jasny/jasny-bootstrap.min.css', 1);
+            $('select[name=hero]').val('<%=user.hero%>');
+        }
+    </script>

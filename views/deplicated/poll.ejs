@@ -1,0 +1,48 @@
+<% layout('layout') %>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2><strong>설문조사</strong></h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="">홈</a>
+                </li>
+                <li class="active"> <strong>설문조사</strong></li>
+            </ol>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>설문조사 <small>동호회 설문조사입니다.</small></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <!--<form class="form-horizontal">-->
+                        <div class="form-group">
+                            <p><small>경쟁전 참여확인입니다.</small></p>
+                            <label class="col-sm-12 control-label">리그전 (가칭:삼펙스)를 참여 하시겠습니까?</label>
+
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button class="ladda-button btn btn-warning ladda-button-reject" data-style="expand-left"><i class="fa fa-ban"></i> 불참</button>
+                                <button class="ladda-button btn btn-primary ladda-button-accept" data-style="expand-right"><i class="fa fa-check"></i> 참여</button>
+                            </div>
+                        </div>
+                        <!--</form>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.onload = function () {
+            $('head').append('<script src=\'/js/app.poll.js\'><\/script>');
+        }
+    </script>

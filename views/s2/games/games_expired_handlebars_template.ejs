@@ -1,0 +1,76 @@
+<script id="game-expired-html-template" type="text/x-handlebars-template">
+
+    <div class="row g-pt-20">
+
+        <div class="col-12 col-md-6 mb-4">
+            <div class="cbp js-lightbox-slider" data-manual="true">
+                <div class="cbp-item">
+                    <div class="u-block-hover g-parent">
+                        <img class="g-height-200 image-fit-cover w-100 g-transform-scale-1_1--parent-hover g-transition-0_5 g-transition--ease-in-out"
+                            src="{{game.media_image}}">
+                        <div class="d-flex w-100 h-100 g-bg-black-opacity-0_6 opacity-0 g-opacity-1--parent-hover g-pos-abs g-top-0 g-left-0 g-transition-0_3 g-transition--ease-in u-block-hover__additional--fade u-block-hover__additional--fade-in g-pa-20">
+                            <a class="cbp-lightbox g-absolute-centered u-icon-v2 u-icon-size--md g-brd-white g-color-black g-bg-white rounded-circle"
+                                href="{{game.media}}">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <!-- options -->
+            <div class="g-brd-around g-brd-2 options-button g-brd-gray-dark-v4 g-brd-primary--hover g-pos-abs g-top-0 g-right-20 dropdown g-mb-0--md g-show-check spex-level-99 spex-level-3">
+                <span class="d-block g-color-primary--hover g-cursor-pointer g-pa-5-10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-angle-down g-pos-rel g-top-1"></i>
+                </span>
+                <div class="dropdown-menu dropdown-menu-right rounded-0 g-mt-10">
+                    <a class="dropdown-item g-px-10 modify-game" data-spex-game-id="{{game.game_id}}">
+                        <i class="icon-note g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> 수정</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item g-px-10" href="#">
+                        <i class="icon-ban g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> 삭제</a>
+                </div>
+            </div>
+            <!-- End options -->
+
+            <p class="g-color-main g-font-weight-600 g-font-size-13 g-font-size-16--md">대전팀
+                <br/>
+                <span class=" g-font-weight-600 g-font-size-26 g-font-size-32--md">{{game.game_info.red_team.info.info.name}} vs {{game.game_info.blue_team.info.info.name}}</span>
+            </p>
+            <h6 class="mb-3">
+                <i class="fa fa-calendar g-font-size-17 g-color-primary mr-3"></i>
+                <span class=" g-font-weight-600 g-font-size-15">{{date}}</span>
+            </h6>
+
+            <h3 class="g-color-primary g-font-weight-600 g-font-size-37 ext-uppercase mb-3">
+                <span>{{game.game_info.red_team.score}}</span>
+                <span class="g-color-main g-font-weight-700 mx-2">:</span>
+                <span class="g-color-main g-font-weight-700 mr-3">{{game.game_info.blue_team.score}}</span>
+                <span class="g-font-size-22">{{game.won_team_name}} 승</span>
+            </h3>
+        </div>
+
+        <div class="col-12 col-md-12">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <p class="g-color-main g-font-weight-600 g-font-size-12">중계정보</p>
+                    <p>
+                        <span class="g-font-weight-600 g-font-size-17 align-middle mr-2">
+                            <i class="fa fa-youtube" aria-hidden="true"></i>
+                        </span>
+                        <span class="g-font-weight-600 g-font-size-12">삼펙스 공식 채널</span>
+                    </p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <a class="btn u-btn-primary g-font-size-12 text-uppercase g-py-10 g-px-20" href="/s2/game/{{game.game_id}}">경기상세정보
+                        <i class="ml-2 fa fa-chevron-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</script>

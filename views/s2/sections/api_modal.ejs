@@ -1,0 +1,120 @@
+<section class="modal fade" id="apiModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">운영진 API</h4>
+            </div>
+            <div class="modal-body">
+                <form name="api4" class="spex-level-3 g-show-check">
+                    <div class="form-group row g-mb-25">
+                        <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">전체평균조회</label>
+                        <div class="col-sm-9 g-mb-20">
+                            <div class="input-group rounded g-brd-primary--focus">
+                                <input class="form-control g-brd-gray-light-v1 g-brd-right-none g-color-gray-dark-v3 g-placeholder-gray-dark-v3" type="text"
+                                    placeholder="조회버튼을 이용하세요" name="score">
+                                <span class="input-group-addon g-brd-gray-light-v1 g-bg-white">
+                                    <button class="btn u-btn-primary rounded" type="submit">조회</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form name="api5" class="spex-level-2 spex-level-3 g-show-check">
+                    <div class="form-group row g-mb-25">
+                        <input class="collapse" name="teamid" value="<%= session.leagueInfo.teamID %>">
+                        <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">팀소개변경</label>
+                        <div class="col-sm-9 g-mb-20">
+                            <div class="input-group rounded g-brd-primary--focus">
+
+                                <input class="form-control g-brd-gray-light-v1 g-brd-right-none g-color-gray-dark-v3 g-placeholder-gray-dark-v3" type="text"
+                                    placeholder="팀소개멘트를 변경해보세요" name="comment">
+                                <span class="input-group-addon g-brd-gray-light-v1 g-bg-white">
+                                    <button class="btn u-btn-primary rounded" type="submit"><i class="fa fa-quote-right mr-2"></i>변경</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form name="api1" class="spex-level-2 spex-level-3 g-show-check">
+                    <div class="form-group row g-mb-25">
+                        <input class="collapse" name="requestID" value="<%= session.battleTag %>">
+                        <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">핀번호초기화 배틀태그</label>
+                        <div class="col-sm-7 g-mb-20">
+                            <div class="input-group g-brd-primary--focus">
+                                <input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="text" placeholder="아이디#배틀태그" name="battletag">
+                                <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                    <i class="fa fa-user-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-block u-btn-primary g-font-size-default text-uppercase g-py-10" type="submit">초기화</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form name="api2">
+                    <div class="form-group row g-mb-25">
+                        <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">최고점변경</label>
+
+                        <div class="col-sm-5 g-mb-20">
+                            <div class="input-group g-brd-primary--focus">
+                                <select class="js-custom-select u-select-v1 form-control g-brd-gray-light-v1 g-brd-right-none g-color-gray-dark-v3 g-placeholder-gray-dark-v3 g-py-12"
+                                    id="apiModal_member_select" data-placeholder="조회후 선택" data-control-classes="g-color-gray-dark-v2"
+                                    data-disable-search="true" data-open-icon="fa fa-chevron-down" data-close-icon="fa fa-chevron-up"
+                                    name="battletag">
+                                </select>
+                                <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                    <i class="fa fa-user-o"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 g-mb-20">
+                            <div class="input-group rounded g-brd-primary--focus">
+                                <input class="form-control g-brd-gray-light-v1 g-brd-right-none g-color-gray-dark-v3 g-placeholder-gray-dark-v3" type="text"
+                                    placeholder="최고점" name="score">
+                                <span class="input-group-addon g-brd-gray-light-v1 g-bg-white">
+                                    <button class="btn u-btn-primary rounded" type="submit">변경</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form name="api3" class="spex-level-3 g-show-check">
+                    <div class="form-group row g-mb-25">
+                        <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">팀에게 노티보내기</label>
+                        <div class="col-sm-9 g-mb-20">
+                            <div class="input-group g-brd-primary--focus">
+                                <input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="text" placeholder="제목" name="title">
+                                <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-sm-12 g-mb-20 ">
+                            <div class="input-group g-brd-primary--focus">
+                                <input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="text" placeholder="내용" name="content">
+                                <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                    <i class="fa fa-quote-right"></i>
+                                </div>
+                            </div>
+                            <button class="btn btn-block u-btn-primary g-font-size-default text-uppercase g-py-10 g-my-20" type="submit">노티보내기</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</section>
